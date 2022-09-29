@@ -1,13 +1,10 @@
 import { Button, Form, Input } from "antd";
 import "antd/dist/antd.css";
-import { useDispatch } from "react-redux";
-import { authenticate } from "../features/auth/authSlice";
 
-function Login() {
-	const dispatch = useDispatch();
+function Register() {
 	const onFinish = (values: any) => {
 		console.log("Success:", values);
-		fetch(`${process.env.REACT_APP_LOCAL_URL}/login`, {
+		fetch(`${process.env.REACT_APP_LOCAL_URL}/register`, {
 			method: "POST",
 			// mode: "no-cors",
 			headers: {
@@ -16,10 +13,7 @@ function Login() {
 			body: JSON.stringify(values),
 		})
 			.then((response) => response.json())
-			.then((data) => {
-				console.log(data);
-				dispatch(authenticate(data));
-			});
+			.then((data) => console.log(data));
 	};
 	return (
 		<div className="flex flex-col justify-center items-center min-h-[100vh]">
@@ -29,10 +23,10 @@ function Login() {
 					<div className="flex justify-center">
 						<div className="flex flex-col">
 							<p className="text-2xl lg:text-4xl font-bold text-center">
-								Welcome Back
+								Register Here
 							</p>
 							<p className="text-xs lg:text-sm font-bold text-gray-400">
-								Enter your crendentials to access a book
+								Enter your crendentials to register a book
 							</p>
 						</div>
 					</div>
@@ -57,7 +51,7 @@ function Login() {
 							rules={[
 								{
 									required: true,
-									message: "Please input your username!",
+									message: "Please input your email!",
 								},
 							]}
 						>
@@ -78,21 +72,34 @@ function Login() {
 						</Form.Item>
 
 						<Form.Item
+							label="Confirm Password"
+							name="confirmPassword"
+							rules={[
+								{
+									required: false,
+									message: "Please input your password!",
+								},
+							]}
+						>
+							<Input.Password />
+						</Form.Item>
+
+						<Form.Item
 							wrapperCol={{
 								offset: 8,
 								span: 16,
 							}}
 						>
 							<Button type="primary" htmlType="submit">
-								Submit
+								Register
 							</Button>
 						</Form.Item>
 					</Form>
 				</div>
 			</div>
-			<p>Don't have an account? Register</p>
+			<p>Have an account? Login</p>
 		</div>
 	);
 }
 
-export default Login;
+export default Register;
