@@ -1,38 +1,34 @@
-import { Button, Form, Input } from "antd";
-import "antd/dist/antd.css";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
+import { getCsrfToken, ApiService } from "../utils/ApiServices";
+import { Button, Form, Input } from "antd";
+import "antd/dist/antd.css";
 import { authenticate } from "../features/auth/authSlice";
-import ApiService from "../utils/ApiServices";
+
+export interface InputLoginProps {
+	email: string;
+	password: string;
+}
 
 function Login() {
-	const dispatch = useDispatch();
 	const [csrfTokenState, setCsrfTokenState] = useState("");
+	const dispatch = useDispatch();
+
+	const onFinish = (values: InputLoginProps) => {
+		// console.log("values", values);
+		ApiService("/login", "POST", values, csrfTokenState).then(
+			(data: boolean) => {
+				dispatch(authenticate(data));
+			}
+		);
+	};
+
 	useEffect(() => {
-		ApiService("/getCsrf", "GET").then((response) =>
+		getCsrfToken("/getCsrf", "GET").then((response) =>
 			setCsrfTokenState(response?.csrfToken)
 		);
 	}, []);
-	const onFinish = (values: any) => {
-		console.log("Success:", values);
-		fetch(`${process.env.REACT_APP_LOCAL_URL}/login`, {
-			method: "POST",
-			// mode: "no-cors",
-			headers: {
-				Accept: "application/json",
-				"Content-Type": "application/json",
-				"xsrf-token": csrfTokenState,
-			},
-			credentials: "include",
-			mode: "cors",
-			body: JSON.stringify(values),
-		})
-			.then((response) => response.json())
-			.then((data) => {
-				console.log(data);
-				dispatch(authenticate(data));
-			});
-	};
+
 	return (
 		<div className="flex flex-col justify-center items-center min-h-[100vh]">
 			<p>Click here to get sample test user</p>

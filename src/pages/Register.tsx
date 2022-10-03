@@ -1,20 +1,23 @@
+import { useEffect, useState } from "react";
 import { Button, Form, Input } from "antd";
 import "antd/dist/antd.css";
+import { ApiService, getCsrfToken } from "../utils/ApiServices";
 
 function Register() {
+	const [csrfTokenState, setCsrfTokenState] = useState("");
+
 	const onFinish = (values: any) => {
-		console.log("Success:", values);
-		fetch(`${process.env.REACT_APP_LOCAL_URL}/register`, {
-			method: "POST",
-			// mode: "no-cors",
-			headers: {
-				"Content-Type": "application/json",
-			},
-			body: JSON.stringify(values),
-		})
-			.then((response) => response.json())
-			.then((data) => console.log(data));
+		ApiService("/login", "POST", values, csrfTokenState).then((data) =>
+			console.log(data)
+		);
 	};
+
+	useEffect(() => {
+		getCsrfToken("/getCsrf", "GET").then((response) =>
+			setCsrfTokenState(response?.csrfToken)
+		);
+	}, []);
+
 	return (
 		<div className="flex flex-col justify-center items-center min-h-[100vh]">
 			<p>Click here to get sample test user</p>
