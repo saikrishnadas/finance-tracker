@@ -1,18 +1,30 @@
 import { Button, Form, Input } from "antd";
 import "antd/dist/antd.css";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { authenticate } from "../features/auth/authSlice";
+import ApiService from "../utils/ApiServices";
 
 function Login() {
 	const dispatch = useDispatch();
+	const [csrfTokenState, setCsrfTokenState] = useState("");
+	useEffect(() => {
+		ApiService("/getCsrf", "GET").then((response) =>
+			setCsrfTokenState(response?.csrfToken)
+		);
+	}, []);
 	const onFinish = (values: any) => {
 		console.log("Success:", values);
 		fetch(`${process.env.REACT_APP_LOCAL_URL}/login`, {
 			method: "POST",
 			// mode: "no-cors",
 			headers: {
+				Accept: "application/json",
 				"Content-Type": "application/json",
+				"xsrf-token": csrfTokenState,
 			},
+			credentials: "include",
+			mode: "cors",
 			body: JSON.stringify(values),
 		})
 			.then((response) => response.json())
