@@ -1,6 +1,4 @@
 import { useEffect, useState } from "react";
-import { Button, Form, Input } from "antd";
-import "antd/dist/antd.css";
 import { ApiService, getCsrfToken } from "../utils/ApiServices";
 
 function Register() {
@@ -33,7 +31,7 @@ function Register() {
 							</p>
 						</div>
 					</div>
-					<Form
+					{/* <Form
 						name="basic"
 						labelCol={{
 							span: 8,
@@ -97,7 +95,7 @@ function Register() {
 								Register
 							</Button>
 						</Form.Item>
-					</Form>
+					</Form> */}
 				</div>
 			</div>
 			<p>Have an account? Login</p>

@@ -13,6 +13,7 @@ export const ApiService = async (endpointUrl:string,method:string,data?:InputLog
         body: JSON.stringify(data),
     })
     let parsedResponse = fetchResponse.json();
+    console.log(parsedResponse)
     return parsedResponse
 
 }
