@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
 
+
 export interface AuthState {
   isLogged: boolean
 }
@@ -19,6 +20,7 @@ export const authSlice = createSlice({
       // which detects changes to a "draft state" and produces a brand new
       // immutable state based off those changes
       state.isLogged = action.payload
+
     },
   },
 })

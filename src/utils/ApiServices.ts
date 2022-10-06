@@ -12,9 +12,13 @@ export const ApiService = async (endpointUrl:string,method:string,data?:InputLog
         mode: 'cors',
         body: JSON.stringify(data),
     })
-    let parsedResponse = fetchResponse.json();
-    console.log(parsedResponse)
-    return parsedResponse
+    let parsedResponse = await fetchResponse.json();
+    if(fetchResponse.ok){
+        console.log(parsedResponse)
+        return parsedResponse
+    }else{
+        throw parsedResponse.error
+    }
 
 }
 
