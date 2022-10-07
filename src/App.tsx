@@ -7,6 +7,7 @@ import Dashboard from "./pages/Dashboard";
 import Register from "./pages/Register";
 import ProtectedRoutes from "./utils/ProtectedRoutes";
 import { ChakraProvider, extendTheme } from "@chakra-ui/react";
+import PageNotFound404 from "./pages/PageNotFound404";
 
 function App() {
 	const theme = extendTheme({
@@ -29,6 +30,7 @@ function App() {
 					</Route>
 					<Route path="/login" element={<Login />} />
 					<Route path="/register" element={<Register />} />
+					<Route path="*" element={<PageNotFound404 />} />
 				</Routes>
 			</ChakraProvider>
 		</div>
