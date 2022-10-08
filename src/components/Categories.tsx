@@ -6,7 +6,7 @@ function Categories() {
 			<div className="pb-5 font-bold">
 				<p>CATEGORIES</p>
 			</div>
-			<div className="flex flex-col gap-y-5">
+			<div className="flex flex-col gap-y-5 ml-10">
 				<div className="flex gap-x-3 items-center">
 					<TimeIcon color="black" />
 					<p>Automobiles</p>
