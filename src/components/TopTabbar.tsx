@@ -1,9 +1,11 @@
 import { Tabs, TabList, TabPanels, Tab, TabPanel } from "@chakra-ui/react";
+import { useNavigate } from "react-router-dom";
 
 // @ts-ignore
 import { StarIcon, MoonIcon } from "@chakra-ui/icons";
 
-function Topbar() {
+function TopTabbar() {
+	const navigate = useNavigate();
 	return (
 		<>
 			<Tabs
@@ -15,25 +17,20 @@ function Topbar() {
 				className="w-[80%]"
 			>
 				<TabList>
-					<Tab>
-						<StarIcon color="white" />
-					</Tab>
-					<Tab>
-						<MoonIcon color="white" />
-					</Tab>
+					<div onClick={() => navigate("/")}>
+						<Tab>
+							<StarIcon color="white" />
+						</Tab>
+					</div>
+					<div onClick={() => navigate("/dashboard")}>
+						<Tab>
+							<MoonIcon color="white" />
+						</Tab>
+					</div>
 				</TabList>
-
-				<TabPanels>
-					<TabPanel>
-						<p>Homepage!</p>
-					</TabPanel>
-					<TabPanel>
-						<p>Dashboard!</p>
-					</TabPanel>
-				</TabPanels>
 			</Tabs>
 		</>
 	);
 }
 
-export default Topbar;
+export default TopTabbar;

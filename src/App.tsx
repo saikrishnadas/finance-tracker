@@ -13,15 +13,15 @@ function App() {
 	const theme = extendTheme({
 		colors: {
 			brand: {
-				50: "#29315A",
-				100: "#29315A",
-				500: "#29315A",
+				// 50: "#29315A",
+				// 100: "#29315A",
+				// 500: "#29315A",
 			},
 		},
 	});
 
 	return (
-		<div className="bg-[#29315A] min-h-[100vh]">
+		<div className="min-h-[100vh]">
 			<ChakraProvider theme={theme}>
 				<Routes>
 					<Route element={<ProtectedRoutes />}>
