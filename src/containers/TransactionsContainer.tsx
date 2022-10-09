@@ -1,5 +1,11 @@
+import DateTransaction from "./DateTransaction";
+
 function TransactionsContainer() {
-	return <></>;
+	return (
+		<>
+			<DateTransaction />
+		</>
+	);
 }
 
 export default TransactionsContainer;
