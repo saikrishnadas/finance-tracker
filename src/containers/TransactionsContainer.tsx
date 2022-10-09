@@ -8,11 +8,18 @@ function TransactionsContainer() {
 			<DateTransaction />
 			<Total />
 			<div className="w-[100%] h-[0.5px] bg-gray-300 mt-5" />
-			<Record />
-			<Record />
-			<Record />
-			<Record />
-			<Record />
+			<div className="pr-5 scrollbar-thumb-blue-600 scrollbar-track-gray-100 scrollbar-thin overflow-auto h-[24em] max-h-[24em]">
+				<Record />
+				<Record />
+				<Record />
+				<Record />
+				<Record />
+				<Record />
+				<Record />
+				<Record />
+				<Record />
+				<Record />
+			</div>
 		</>
 	);
 }
