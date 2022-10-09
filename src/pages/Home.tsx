@@ -6,6 +6,7 @@ import Topbar from "../components/TopTabbar";
 import Sidebar from "../containers/Sidebar";
 import Detailsbar from "../containers/Detailsbar";
 import TransactionsContainer from "../containers/TransactionsContainer";
+import BudgetContainer from "../containers/BudgetContainer";
 
 function Home() {
 	return (
@@ -15,6 +16,9 @@ function Home() {
 				<Detailsbar />
 				<div className="w-[22em] lg:w-[40em] pl-10 pt-10">
 					<TransactionsContainer />
+				</div>
+				<div className="lg:w-[28em] w-[22em] lg:max-w-[28em] pl-10 pt-10">
+					<BudgetContainer />
 				</div>
 			</div>
 		</div>
