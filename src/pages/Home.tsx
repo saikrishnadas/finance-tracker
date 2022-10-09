@@ -17,7 +17,7 @@ function Home() {
 				<div className="w-[22em] lg:w-[40em] pl-10 pt-10">
 					<TransactionsContainer />
 				</div>
-				<div className="lg:w-[28em] w-[22em] lg:max-w-[28em] pl-10 pt-10">
+				<div className="hidden lg:block lg:w-[28em] lg:max-w-[28em] lg:pl-10 lg:pt-10">
 					<BudgetContainer />
 				</div>
 			</div>
