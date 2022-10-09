@@ -9,6 +9,10 @@ function TransactionsContainer() {
 			<Total />
 			<div className="w-[100%] h-[0.5px] bg-gray-300 mt-5" />
 			<Record />
+			<Record />
+			<Record />
+			<Record />
+			<Record />
 		</>
 	);
 }

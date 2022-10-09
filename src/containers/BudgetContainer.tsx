@@ -1,4 +1,5 @@
 import React from "react";
+import ExpenseOverview from "../components/ExpenseOverview";
 import MonthlyOverview from "../components/MonthlyOverview";
 
 function BudgetContainer() {
@@ -8,6 +9,7 @@ function BudgetContainer() {
 				<p>Set up Monthly Budget</p>
 			</div>
 			<MonthlyOverview />
+			<ExpenseOverview />
 		</div>
 	);
 }
