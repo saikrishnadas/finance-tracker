@@ -13,7 +13,7 @@ function Home() {
 			<div className="lg:flex">
 				<Sidebar />
 				<Detailsbar />
-				<div className="w-[22em] lg:w-[40em] pl-10 pt-10 lg:pt-20">
+				<div className="w-[22em] lg:w-[40em] pl-10 pt-10">
 					<TransactionsContainer />
 				</div>
 			</div>
