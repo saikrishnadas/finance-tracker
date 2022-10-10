@@ -1,5 +1,6 @@
 import React from "react";
 import { useState } from "react";
+import { categories } from "../../utils/day";
 import {
 	Modal,
 	ModalOverlay,
@@ -29,6 +30,7 @@ function AddCategoryModal({ isOpen, onClose }: AddCategoryModalProps) {
 	const handleSubmit = () => {
 		console.log(name);
 		console.log(color);
+		categories.push({ title: name, color: color });
 		onClose();
 	};
 
