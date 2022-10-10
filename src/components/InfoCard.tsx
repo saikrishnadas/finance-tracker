@@ -13,8 +13,9 @@ import {
 import {
 	HamburgerIcon,
 	RepeatIcon,
-	AddIcon,
+	WarningIcon,
 	ExternalLinkIcon,
+	AddIcon,
 } from "@chakra-ui/icons";
 
 interface InfoCardProps {
@@ -39,15 +40,10 @@ function InfoCard({ title, count, icon }: InfoCardProps) {
 							variant="none"
 						/>
 						<MenuList>
-							<MenuItem icon={<AddIcon />} command="⌘T">
-								New Tab
-							</MenuItem>
-							<MenuItem icon={<ExternalLinkIcon />} command="⌘N">
-								New Window
-							</MenuItem>
-							<MenuItem icon={<RepeatIcon />} command="⌘⇧N">
-								Open Closed Tab
-							</MenuItem>
+							<MenuItem icon={<WarningIcon />}>Report Issue</MenuItem>
+							{title === "Your bank balance" && (
+								<MenuItem icon={<AddIcon />}>Update Balance</MenuItem>
+							)}
 						</MenuList>
 					</Menu>
 				</div>
