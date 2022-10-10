@@ -24,7 +24,7 @@ function Dashboard() {
 	return (
 		<div className="block lg:flex">
 			<Sidebar />
-			<Detailsbar />'
+			<Detailsbar />
 			<div>
 				<div className="mt-10 ml-10">
 					<InfoContainer />
