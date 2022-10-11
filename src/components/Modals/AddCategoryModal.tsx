@@ -1,6 +1,7 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { categories } from "../../utils/day";
+import { getCsrfToken, ApiService } from "../../utils/ApiServices";
 import {
 	Modal,
 	ModalOverlay,
@@ -26,13 +27,32 @@ function AddCategoryModal({ isOpen, onClose }: AddCategoryModalProps) {
 	const [color, setColor] = useState("");
 	const initialRef = React.useRef(null);
 	const finalRef = React.useRef(null);
+	const [csrfTokenState, setCsrfTokenState] = useState("");
 
 	const handleSubmit = () => {
 		console.log(name);
 		console.log(color);
-		categories.push({ title: name, color: color });
+		// categories.push({ title: name, color: color });
+		ApiService(
+			"/categories",
+			"POST",
+			{ title: name, color: color },
+			csrfTokenState
+		)
+			.then((data: boolean) => {
+				console.log(data);
+			})
+			.catch((err) => {
+				console.log(err);
+			});
 		onClose();
 	};
+
+	useEffect(() => {
+		getCsrfToken("/getCsrf", "GET").then((response) =>
+			setCsrfTokenState(response?.csrfToken)
+		);
+	}, []);
 
 	return (
 		<>

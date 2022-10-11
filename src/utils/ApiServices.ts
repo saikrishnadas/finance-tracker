@@ -1,6 +1,6 @@
 import {InputLoginProps} from "../pages/Login"
 
-export const ApiService = async (endpointUrl:string,method:string,data?:InputLoginProps,csrfTokenState?:any) => {
+export const ApiService = async (endpointUrl:string,method:string,data?:any,csrfTokenState?:any) => {
     let fetchResponse = await fetch(`${process.env.REACT_APP_LOCAL_URL}${endpointUrl}`, {
         method: method,
         headers: {
