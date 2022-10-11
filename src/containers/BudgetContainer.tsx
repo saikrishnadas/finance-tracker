@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ExpenseOverview from "../components/ExpenseOverview";
 import MonthlyOverview from "../components/MonthlyOverview";
 import BudgetSetupModal from "../components/Modals/BudgetSetupModal";
 
 function BudgetContainer() {
 	const [isOpen, setIsOpen] = useState(false);
+	const [budget, setBudget] = useState(null);
 	const openBudgetModal = () => {
 		setIsOpen(true);
 	};
@@ -12,6 +13,25 @@ function BudgetContainer() {
 	const onClose = () => {
 		setIsOpen(false);
 	};
+
+	const getBudget = () => {
+		fetch(`${process.env.REACT_APP_LOCAL_URL}/budget`, {
+			method: "GET",
+			// mode: "no-cors",
+			headers: {
+				"Content-Type": "application/json",
+			},
+		})
+			.then((response) => response.json())
+			.then((data) => {
+				console.log(data);
+				setBudget(data?.budget);
+			});
+	};
+
+	useEffect(() => {
+		getBudget();
+	}, []);
 	return (
 		<div>
 			<div
@@ -22,7 +42,7 @@ function BudgetContainer() {
 			</div>
 			<div className="text-sm flex justify-center">
 				<p className="flex gap-x-2">
-					Current Monthly Budget: <p className="font-bold">$6000</p>
+					Current Monthly Budget: <p className="font-bold">${budget}</p>
 				</p>
 			</div>
 			<MonthlyOverview />

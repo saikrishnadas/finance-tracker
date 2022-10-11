@@ -1,5 +1,4 @@
-import React from "react";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import {
 	Modal,
 	ModalOverlay,
@@ -14,6 +13,7 @@ import {
 	Button,
 	Select,
 } from "@chakra-ui/react";
+import { getCsrfToken, ApiService } from "../../utils/ApiServices";
 
 interface EditCategoryModalProps {
 	isOpen: boolean;
@@ -22,13 +22,26 @@ interface EditCategoryModalProps {
 
 function BudgetSetupModal({ isOpen, onClose }: EditCategoryModalProps) {
 	const [count, setCount] = useState(null);
-	const initialRef = React.useRef(null);
-	const finalRef = React.useRef(null);
+	const initialRef = useRef(null);
+	const finalRef = useRef(null);
+	const [csrfTokenState, setCsrfTokenState] = useState("");
 
 	const handleSubmit = () => {
-		console.log(count);
+		ApiService("/budget", "POST", { budget: count }, csrfTokenState)
+			.then((data: boolean) => {
+				console.log(data);
+			})
+			.catch((err) => {
+				console.log(err);
+			});
 		onClose();
 	};
+
+	useEffect(() => {
+		getCsrfToken("/getCsrf", "GET").then((response) =>
+			setCsrfTokenState(response?.csrfToken)
+		);
+	}, []);
 
 	return (
 		<>
