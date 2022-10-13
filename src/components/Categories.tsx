@@ -30,7 +30,6 @@ function Categories() {
 	const getCategories = () => {
 		fetch(`${process.env.REACT_APP_LOCAL_URL}/categories`, {
 			method: "GET",
-			// mode: "no-cors",
 			headers: {
 				"Content-Type": "application/json",
 			},

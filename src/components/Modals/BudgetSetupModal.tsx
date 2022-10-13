@@ -37,11 +37,11 @@ function BudgetSetupModal({ isOpen, onClose }: EditCategoryModalProps) {
 		onClose();
 	};
 
-	useEffect(() => {
-		getCsrfToken("/getCsrf", "GET").then((response) =>
-			setCsrfTokenState(response?.csrfToken)
-		);
-	}, []);
+	// useEffect(() => {
+	// 	getCsrfToken("/getCsrf", "GET").then((response) =>
+	// 		setCsrfTokenState(response?.csrfToken)
+	// 	);
+	// }, []);
 
 	return (
 		<>
