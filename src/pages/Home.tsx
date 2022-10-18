@@ -7,8 +7,11 @@ import Sidebar from "../containers/Sidebar";
 import Detailsbar from "../containers/Detailsbar";
 import TransactionsContainer from "../containers/TransactionsContainer";
 import BudgetContainer from "../containers/BudgetContainer";
+import { useState } from "react";
 
 function Home() {
+	const [isAuth, setIsAuth] = useState(false);
+
 	return (
 		<div>
 			<div className="lg:flex">

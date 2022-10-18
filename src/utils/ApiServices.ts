@@ -31,3 +31,18 @@ export const getCsrfToken = async (endpointUrl:string,method:string) => {
     return parsedResponse
 
 }
+
+export const ApiImageService = async (endpointUrl:string,method:string,data?:any,csrfTokenState?:any) => {
+    let fetchResponse = await fetch(`${process.env.REACT_APP_LOCAL_URL}${endpointUrl}`, {
+        method: method,
+        body: data,
+    })
+    let parsedResponse = await fetchResponse.json();
+    if(fetchResponse.ok){
+        console.log(parsedResponse)
+        return parsedResponse
+    }else{
+        throw parsedResponse.error
+    }
+
+}

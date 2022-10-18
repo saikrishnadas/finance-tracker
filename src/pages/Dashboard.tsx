@@ -8,8 +8,10 @@ import InfoContainer from "../containers/InfoContainer";
 import Count from "../components/Count";
 import ExpenseGraph from "../containers/ExpenseGraph";
 import ExpenseGraphMobile from "../containers/ExpenseGraphMobile";
+import { useState } from "react";
 
 function Dashboard() {
+	const [isAuth, setIsAuth] = useState(false);
 	const handleLogout = () => {
 		fetch(`{process.env.REACT_APP_LOCAL_URL}/logout`, {
 			method: "POST",
