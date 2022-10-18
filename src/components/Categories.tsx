@@ -5,11 +5,14 @@ import { Tabs, TabList, TabPanels, Tab, TabPanel } from "@chakra-ui/react";
 import { EditIcon } from "@chakra-ui/icons";
 import AddCategoryModal from "./Modals/AddCategoryModal";
 import EditCategoryModal from "./Modals/EditCategoryModal";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../store/index";
 
 function Categories() {
 	const [isOpen, setIsOpen] = useState(false);
 	const [isOpenEdit, setIsOpenEdit] = useState(false);
 	const [categories, setCategories] = useState([]);
+	const token = useSelector((state: RootState) => state.auth.token);
 
 	const openAddCategoryModal = () => {
 		setIsOpen(true);
@@ -32,6 +35,7 @@ function Categories() {
 			method: "GET",
 			headers: {
 				"Content-Type": "application/json",
+				Authorization: `Bearer ${token}`,
 			},
 		})
 			.then((response) => response.json())
@@ -42,6 +46,7 @@ function Categories() {
 	};
 
 	useEffect(() => {
+		console.log("Token ==>", token);
 		getCategories();
 	}, []);
 
@@ -54,15 +59,15 @@ function Categories() {
 				{categories.map((cat: any) => (
 					<span className="flex gap-x-3 items-center" key={cat._id}>
 						<div
-							className={`w-5 h-5 ${cat.color === "red" && "bg-red-500"} ${
-								cat.color === "blue" && "bg-blue-500"
-							} ${cat.color === "green" && "bg-green-500"} ${
-								cat.color === "purple" && "bg-purple-500"
-							} ${cat.color === "yellow" && "bg-yellow-500"} ${
-								cat.color === "pink" && "bg-pink-500"
-							}`}
+							className={`w-5 h-5 ${
+								cat.categories.color === "red" && "bg-red-500"
+							} ${cat.categories.color === "blue" && "bg-blue-500"} ${
+								cat.categories.color === "green" && "bg-green-500"
+							} ${cat.categories.color === "purple" && "bg-purple-500"} ${
+								cat.categories.color === "yellow" && "bg-yellow-500"
+							} ${cat.categories.color === "pink" && "bg-pink-500"}`}
 						/>
-						<p>{cat.title}</p>
+						<p>{cat.categories.title}</p>
 						<span className="cursor-pointer" onClick={openEditCategoryModal}>
 							<EditIcon color="blue.700" />
 						</span>

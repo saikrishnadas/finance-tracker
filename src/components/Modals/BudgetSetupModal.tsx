@@ -27,7 +27,7 @@ function BudgetSetupModal({ isOpen, onClose }: EditCategoryModalProps) {
 	const [csrfTokenState, setCsrfTokenState] = useState("");
 
 	const handleSubmit = () => {
-		ApiService("/budget", "POST", { budget: count }, csrfTokenState)
+		ApiService("/budget", "POST", { budget: count })
 			.then((data: boolean) => {
 				console.log(data);
 			})

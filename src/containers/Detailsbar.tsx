@@ -3,7 +3,7 @@ import Categories from "../components/Categories";
 import { Select } from "@chakra-ui/react";
 import flag from "../images/indian-flag.png";
 
-function Detailsbar() {
+function Detailsbar({ token }: any) {
 	return (
 		<div className="bg-gray-200 w-[18vw] pt-10 lg:flex flex-col justify-between pb-5 gap-y-10 hidden">
 			{/* <Accounts /> */}

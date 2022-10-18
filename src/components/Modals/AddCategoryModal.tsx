@@ -1,7 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { categories } from "../../utils/day";
-import { getCsrfToken, ApiService } from "../../utils/ApiServices";
+import { getCsrfToken, ApiServicePost } from "../../utils/ApiServices";
 import {
 	Modal,
 	ModalOverlay,
@@ -16,6 +16,8 @@ import {
 	Button,
 	Select,
 } from "@chakra-ui/react";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../store/index";
 
 interface AddCategoryModalProps {
 	isOpen: boolean;
@@ -27,25 +29,20 @@ function AddCategoryModal({ isOpen, onClose }: AddCategoryModalProps) {
 	const [color, setColor] = useState("");
 	const initialRef = React.useRef(null);
 	const finalRef = React.useRef(null);
-	const [csrfTokenState, setCsrfTokenState] = useState("");
+	const token = useSelector((state: RootState) => state.auth.token);
 
 	const handleSubmit = () => {
 		console.log(name);
 		console.log(color);
 		// categories.push({ title: name, color: color });
-		ApiService(
-			"/categories",
-			"POST",
-			{ title: name, color: color },
-			csrfTokenState
-		)
+		ApiServicePost("/categories", "POST", { title: name, color: color }, token)
 			.then((data: boolean) => {
 				console.log(data);
 			})
 			.catch((err) => {
 				console.log(err);
 			});
-		onClose();
+		// onClose();
 	};
 
 	// useEffect(() => {

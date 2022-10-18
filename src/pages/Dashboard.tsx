@@ -9,15 +9,19 @@ import Count from "../components/Count";
 import ExpenseGraph from "../containers/ExpenseGraph";
 import ExpenseGraphMobile from "../containers/ExpenseGraphMobile";
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../store/index";
 
 function Dashboard() {
 	const [isAuth, setIsAuth] = useState(false);
+	const token = useSelector((state: RootState) => state.auth.token);
 	const handleLogout = () => {
 		fetch(`{process.env.REACT_APP_LOCAL_URL}/logout`, {
 			method: "POST",
 			// mode: "no-cors",
 			headers: {
 				"Content-Type": "application/json",
+				Authorization: "Bearer " + token,
 			},
 		})
 			.then((response) => response.json())

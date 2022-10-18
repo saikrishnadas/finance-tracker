@@ -1,7 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { categories } from "../../utils/day";
-import { getCsrfToken, ApiImageService } from "../../utils/ApiServices";
+import { getCsrfToken } from "../../utils/ApiServices";
 import {
 	Modal,
 	ModalOverlay,

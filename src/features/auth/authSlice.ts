@@ -3,11 +3,11 @@ import type { PayloadAction } from '@reduxjs/toolkit'
 
 
 export interface AuthState {
-  isLogged: boolean
+  token: any
 }
 
 const initialState: AuthState = {
-    isLogged: false,
+    token: localStorage.getItem("token"),
 }
 
 export const authSlice = createSlice({
@@ -19,7 +19,7 @@ export const authSlice = createSlice({
       // doesn't actually mutate the state because it uses the Immer library,
       // which detects changes to a "draft state" and produces a brand new
       // immutable state based off those changes
-      state.isLogged = action.payload
+      state.token = action.payload
 
     },
   },

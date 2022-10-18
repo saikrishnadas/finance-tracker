@@ -26,7 +26,7 @@ function Login() {
 	const navigate = useNavigate();
 	const [csrfTokenState, setCsrfTokenState] = useState("");
 	const dispatch = useDispatch();
-	const isLoggedIn = useSelector((state: RootState) => state.isLogged.isLogged);
+	// const token = useSelector((state: RootState) => state.auth.token);
 
 	const [error, setError] = useState(false);
 	const [errorMessage, setErrorMessage] = useState("");
@@ -42,14 +42,11 @@ function Login() {
 	};
 
 	const onFinish = () => {
-		ApiService(
-			"/login",
-			"POST",
-			{ email: email, password: password },
-			csrfTokenState
-		)
-			.then((data: boolean) => {
-				dispatch(authenticate(data));
+		ApiService("/login", "POST", { email: email, password: password })
+			.then((data: any) => {
+				let { token } = data;
+				localStorage.setItem("token", token);
+				// dispatch(authenticate(data));
 				return navigate("/dashboard");
 			})
 			.catch((err) => {
@@ -64,11 +61,11 @@ function Login() {
 	// 	);
 	// }, []);
 
-	useEffect(() => {
-		if (isLoggedIn) {
-			return navigate("/dashboard");
-		}
-	}, [isLoggedIn]);
+	// useEffect(() => {
+	// 	if (isLoggedIn) {
+	// 		return navigate("/dashboard");
+	// 	}
+	// }, [isLoggedIn]);
 
 	return (
 		<>

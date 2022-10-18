@@ -28,12 +28,11 @@ function Register() {
 	const isConfirmPasswordError = confirmPassword === "ss";
 
 	const onFinish = () => {
-		ApiService(
-			"/register",
-			"POST",
-			{ email: email, password: password, confirmPassword: confirmPassword },
-			csrfTokenState
-		)
+		ApiService("/register", "POST", {
+			email: email,
+			password: password,
+			confirmPassword: confirmPassword,
+		})
 			.then((data) => {
 				return navigate("/login");
 			})
