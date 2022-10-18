@@ -2,10 +2,14 @@ import { useState, useEffect } from "react";
 import ExpenseOverview from "../components/ExpenseOverview";
 import MonthlyOverview from "../components/MonthlyOverview";
 import BudgetSetupModal from "../components/Modals/BudgetSetupModal";
+import { RootState } from "../store/index";
+import { useSelector } from "react-redux";
 
 function BudgetContainer() {
 	const [isOpen, setIsOpen] = useState(false);
 	const [budget, setBudget] = useState(null);
+	const token = useSelector((state: RootState) => state.auth.token);
+
 	const openBudgetModal = () => {
 		setIsOpen(true);
 	};
@@ -20,6 +24,7 @@ function BudgetContainer() {
 			// mode: "no-cors",
 			headers: {
 				"Content-Type": "application/json",
+				Authorization: `Bearer ${token}`,
 			},
 		})
 			.then((response) => response.json())
@@ -41,9 +46,14 @@ function BudgetContainer() {
 				<p>Set up Monthly Budget</p>
 			</div>
 			<div className="text-sm flex justify-center">
-				<p className="flex gap-x-2">
-					Current Monthly Budget: <p className="font-bold">${budget}</p>
-				</p>
+				{budget === 0 ? (
+					<p className="flex gap-x-2">Monthly Budget not set</p>
+				) : (
+					<p className="flex gap-x-2">
+						Current Monthly Budget:
+						<p className="font-bold">${budget}</p>
+					</p>
+				)}
 			</div>
 			<MonthlyOverview />
 			<ExpenseOverview />

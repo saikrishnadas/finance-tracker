@@ -13,7 +13,9 @@ import {
 	Button,
 	Select,
 } from "@chakra-ui/react";
-import { getCsrfToken, ApiService } from "../../utils/ApiServices";
+import { getCsrfToken, ApiServicePost } from "../../utils/ApiServices";
+import { useSelector } from "react-redux";
+import { RootState } from "../../store/index";
 
 interface EditCategoryModalProps {
 	isOpen: boolean;
@@ -25,9 +27,15 @@ function BudgetSetupModal({ isOpen, onClose }: EditCategoryModalProps) {
 	const initialRef = useRef(null);
 	const finalRef = useRef(null);
 	const [csrfTokenState, setCsrfTokenState] = useState("");
+	const token = useSelector((state: RootState) => state.auth.token);
 
 	const handleSubmit = () => {
-		ApiService("/budget", "POST", { budget: count })
+		ApiServicePost(
+			"/budget",
+			"POST",
+			{ budget: count && parseInt(count) },
+			token
+		)
 			.then((data: boolean) => {
 				console.log(data);
 			})
