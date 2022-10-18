@@ -8,11 +8,13 @@ import EditCategoryModal from "./Modals/EditCategoryModal";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../store/index";
 import { ApiServicePost } from "../utils/ApiServices";
+import { useNavigate } from "react-router-dom";
 
 function Categories() {
 	const [isOpen, setIsOpen] = useState(false);
 	const [isOpenEdit, setIsOpenEdit] = useState(false);
 	const [categories, setCategories] = useState([]);
+	const navigate = useNavigate();
 	const token = useSelector((state: RootState) => state.auth.token);
 
 	const openAddCategoryModal = () => {
@@ -52,12 +54,14 @@ function Categories() {
 			.then((response) => response.json())
 			.then((data) => {
 				console.log(data);
+				if (data.message === "jwt expired") {
+					return navigate("/login");
+				}
 				setCategories(data);
 			});
 	};
 
 	useEffect(() => {
-		console.log("Token ==>", token);
 		getCategories();
 	}, []);
 

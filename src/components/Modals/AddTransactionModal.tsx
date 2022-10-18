@@ -44,26 +44,33 @@ function AddTransactionModal({ isOpen, onClose }: AddTransactionModalProps) {
 	const [amount, setAmount] = useState(0);
 	const [category, setCategory] = useState("");
 	const [note, setNote] = useState("");
-	const [date, setDate] = useState<Dayjs | null>(dayjs("2014-08-18T21:11:54"));
+	const [date, setDate] = useState<any>(moment("2014-08-18T21:11:54"));
 	const initialRef = React.useRef(null);
 	const finalRef = React.useRef(null);
 	const token = useSelector((state: RootState) => state.auth.token);
 
 	const handleDate = (date: any, dateString: any) => {
 		console.log(date, dateString);
+		setDate(dateString);
 	};
 
 	const handleSubmit = () => {
-		// console.log(name);
-		// console.log(color);
-		// // categories.push({ title: name, color: color });
-		// ApiServicePost("/categories", "POST", { title: name, color: color }, token)
-		// 	.then((data: boolean) => {
-		// 		console.log(data);
-		// 	})
-		// 	.catch((err) => {
-		// 		console.log(err);
-		// 	});
+		console.log(amount);
+		console.log(category);
+		console.log(note);
+		console.log(date);
+		ApiServicePost(
+			"/transaction",
+			"POST",
+			{ amount: amount, category: category, date: date, note: note },
+			token
+		)
+			.then((data: boolean) => {
+				console.log(data);
+			})
+			.catch((err) => {
+				console.log(err);
+			});
 		onClose();
 	};
 
@@ -111,7 +118,6 @@ function AddTransactionModal({ isOpen, onClose }: AddTransactionModalProps) {
 				<FormControl mt={4}>
 					<FormLabel>Note</FormLabel>
 					<Input
-						ref={initialRef}
 						placeholder="Note (Optional)"
 						onChange={(e: any) => setNote(e.target.value)}
 					/>

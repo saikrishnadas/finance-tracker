@@ -1,6 +1,6 @@
 import React from "react";
 
-function Record({ color }: any) {
+function Record({ color, amount, category, date, note }: any) {
 	return (
 		<div className="flex justify-between items-center mt-5">
 			<div className="flex items-center">
@@ -14,12 +14,12 @@ function Record({ color }: any) {
 					} ${color === "pink" && "bg-pink-500"}`}
 				/>
 				<div className="flex flex-col ml-5">
-					<p className="font-bold">Amazon</p>
-					<p className="text-gray-400">17 Jan'20, 07:32 PM</p>
+					<p className="font-bold capitalize">{category}</p>
+					<p className="text-gray-400">{date.replaceAll("/", "-")}</p>
 				</div>
 			</div>
 			<div>
-				<p>$100.21</p>
+				<p>${amount}</p>
 			</div>
 		</div>
 	);
