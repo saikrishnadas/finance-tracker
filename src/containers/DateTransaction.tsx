@@ -2,6 +2,7 @@ import React from "react";
 import Calender from "../components/Calender";
 import { CalendarIcon, WarningIcon, Search2Icon } from "@chakra-ui/icons";
 import { Input, InputGroup, InputLeftElement } from "@chakra-ui/react";
+import AddTransactionModal from "../components/Modals/AddTransactionModal";
 
 function DateTransaction() {
 	return (
@@ -23,6 +24,7 @@ function DateTransaction() {
 				</InputGroup>
 			</div>
 			<Calender />
+			<AddTransactionModal isOpen={true} onClose={() => console.log("none")} />
 		</div>
 	);
 }

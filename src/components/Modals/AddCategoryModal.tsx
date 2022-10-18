@@ -42,7 +42,7 @@ function AddCategoryModal({ isOpen, onClose }: AddCategoryModalProps) {
 			.catch((err) => {
 				console.log(err);
 			});
-		// onClose();
+		onClose();
 	};
 
 	// useEffect(() => {
