@@ -30,7 +30,7 @@ function Record({ color, amount, category, date, note, id }: any) {
 				/>
 				<div className="flex flex-col ml-5">
 					<p className="font-bold capitalize">{category}</p>
-					<p className="text-gray-400">{date.replaceAll("/", "-")}</p>
+					<p className="text-gray-400">{date.date.replaceAll("/", "-")}</p>
 				</div>
 			</div>
 			<div className="flex items-center gap-x-2">

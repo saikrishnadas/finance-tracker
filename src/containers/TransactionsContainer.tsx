@@ -7,6 +7,7 @@ import { RootState } from "../store/index";
 import { useNavigate } from "react-router-dom";
 import { addTransaction } from "../features/transactionSlice";
 import { getTotal } from "../features/transactionSlice";
+import { CalendarIcon, WarningIcon, Search2Icon } from "@chakra-ui/icons";
 
 function TransactionsContainer() {
 	const [transactions, setTransactions] = useState([]);
@@ -35,13 +36,22 @@ function TransactionsContainer() {
 			});
 	};
 
+	const filterTransaction = () => {
+		let filteredTransaction = transactions.filter(
+			(transaction: any) => transaction.transactions.date.day === 13
+		);
+		setTransactions(filteredTransaction);
+		dispatch(addTransaction(filteredTransaction));
+		dispatch(getTotal());
+	};
+
 	useEffect(() => {
 		getTransactions();
 	}, []);
 
 	return (
 		<>
-			<DateTransaction />
+			<DateTransaction filterTransaction={filterTransaction} />
 			<Total />
 			<div className="w-[100%] h-[0.5px] bg-gray-300 mt-5" />
 			<div className="pr-5 scrollbar-thumb-blue-600 scrollbar-track-gray-100 scrollbar-thin overflow-auto h-[24em] max-h-[24em]">

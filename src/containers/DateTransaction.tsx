@@ -3,8 +3,33 @@ import Calender from "../components/Calender";
 import { CalendarIcon, WarningIcon, Search2Icon } from "@chakra-ui/icons";
 import { Input, InputGroup, InputLeftElement } from "@chakra-ui/react";
 import AddTransactionModal from "../components/Modals/AddTransactionModal";
+import { Dropdown, Menu, Space } from "antd";
 
-function DateTransaction() {
+const menu = (
+	<Menu
+		selectable
+		defaultSelectedKeys={["0"]}
+		items={[
+			{
+				label: <p>Today</p>,
+				key: "0",
+			},
+			{
+				label: <p>This Month</p>,
+				key: "1",
+			},
+			{
+				type: "divider",
+			},
+			{
+				label: <p>Custom</p>,
+				key: "3",
+			},
+		]}
+	/>
+);
+
+function DateTransaction({ filterTransaction }: any) {
 	const [isOpen, setIsOpen] = useState(false);
 	const openAddTransactionModal = () => {
 		setIsOpen(true);
@@ -18,7 +43,9 @@ function DateTransaction() {
 			<div className="flex justify-between items-center">
 				<p className="font-bold text-2xl">Daily Transactions</p>
 				<div className="flex gap-x-4">
-					<CalendarIcon />
+					<Dropdown overlay={menu} trigger={["click"]} placement="bottom">
+						<CalendarIcon />
+					</Dropdown>
 					<WarningIcon onClick={openAddTransactionModal} />
 				</div>
 			</div>

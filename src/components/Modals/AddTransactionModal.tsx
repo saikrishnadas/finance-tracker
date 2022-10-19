@@ -45,6 +45,9 @@ function AddTransactionModal({ isOpen, onClose }: AddTransactionModalProps) {
 	const [category, setCategory] = useState("");
 	const [note, setNote] = useState("");
 	const [date, setDate] = useState(dayjs().startOf("day").format("YYYY-MM-DD"));
+	const [day, setDay] = useState<any>(null);
+	const [month, setMonth] = useState<any>(null);
+	const [year, setYear] = useState<any>(null);
 	const initialRef = React.useRef(null);
 	const finalRef = React.useRef(null);
 	const token = useSelector((state: RootState) => state.auth.token);
@@ -55,9 +58,14 @@ function AddTransactionModal({ isOpen, onClose }: AddTransactionModalProps) {
 	const handleDate = (date: any, dateString: any) => {
 		console.log(date, dateString);
 		let selectedDate = dayjs(date).format("YYYY-MM-DD");
-		// let test = dayjs(selectedDate);
-		// console.log(test.date());
+		let formattedDate = dayjs(selectedDate);
+		let day = formattedDate.date();
+		let month = formattedDate.month();
+		let year = formattedDate.year();
 		setDate(selectedDate);
+		setDay(day);
+		setMonth(month);
+		setYear(year);
 	};
 
 	const handleSubmit = () => {
@@ -71,7 +79,12 @@ function AddTransactionModal({ isOpen, onClose }: AddTransactionModalProps) {
 			{
 				amount: amount,
 				category: category,
-				date: date,
+				date: {
+					day: day,
+					month: month,
+					year: year,
+					date: date,
+				},
 				note: note,
 			},
 			token
