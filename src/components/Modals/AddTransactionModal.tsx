@@ -29,7 +29,7 @@ import { DesktopDatePicker } from "@mui/x-date-pickers/DesktopDatePicker";
 import TextField from "@mui/material/TextField";
 
 import type { DatePickerProps } from "antd";
-import { DatePicker, Space } from "antd";
+import { DatePicker, Space, Radio } from "antd";
 import "antd/dist/antd.css";
 import { Modal } from "antd";
 import { width } from "@mui/system";
@@ -43,6 +43,7 @@ interface AddTransactionModalProps {
 function AddTransactionModal({ isOpen, onClose }: AddTransactionModalProps) {
 	const [amount, setAmount] = useState(0);
 	const [category, setCategory] = useState("");
+	const [type, setType] = useState("Expense");
 	const [note, setNote] = useState("");
 	const [date, setDate] = useState(dayjs().startOf("day").format("YYYY-MM-DD"));
 	const [day, setDay] = useState<any>(null);
@@ -58,10 +59,10 @@ function AddTransactionModal({ isOpen, onClose }: AddTransactionModalProps) {
 	const handleDate = (date: any, dateString: any) => {
 		console.log(date, dateString);
 		let selectedDate = dayjs(date).format("YYYY-MM-DD");
-		let formattedDate = dayjs(selectedDate);
-		let day = formattedDate.date();
-		let month = formattedDate.month();
-		let year = formattedDate.year();
+		// let formattedDate = dayjs(selectedDate);
+		let day = selectedDate.split("-")[2];
+		let month = selectedDate.split("-")[1];
+		let year = selectedDate.split("-")[0];
 		setDate(selectedDate);
 		setDay(day);
 		setMonth(month);
@@ -84,6 +85,7 @@ function AddTransactionModal({ isOpen, onClose }: AddTransactionModalProps) {
 					month: month,
 					year: year,
 					date: date,
+					type: type,
 				},
 				note: note,
 			},
@@ -141,6 +143,16 @@ function AddTransactionModal({ isOpen, onClose }: AddTransactionModalProps) {
 						style={{ width: "100%", height: "40px", borderRadius: "5px" }}
 						placement="bottomRight"
 					/>
+				</FormControl>
+				<FormControl mt={4}>
+					<FormLabel>Type</FormLabel>
+					<Radio.Group
+						onChange={(e: any) => setType(e.target.value)}
+						value={type}
+					>
+						<Radio value="Expense">Expense</Radio>
+						<Radio value="Income">Income</Radio>
+					</Radio.Group>
 				</FormControl>
 
 				<FormControl mt={4}>

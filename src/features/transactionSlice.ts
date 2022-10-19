@@ -9,7 +9,8 @@ import type { PayloadAction } from '@reduxjs/toolkit'
 
 const initialState: any = {
     transactions:[],
-    total:0
+    total:0,
+    previousTotal:0
 }
 export const transactionSlice = createSlice({
   name: 'transaction',
@@ -29,10 +30,20 @@ export const transactionSlice = createSlice({
         });
         state.total = total;
       },
+      getPreviousTotal: (state,action) => {
+        let total = 0;
+        state.transactions.forEach((transaction:any) => {
+          if(transaction.transactions.date.month === action.payload){
+
+            total += transaction.transactions.amount;
+          }
+        });
+        state.previousTotal = total;
+      },
   },
 })
 
 // Action creators are generated for each case reducer function
-export const { addTransaction,getTotal } = transactionSlice.actions
+export const { addTransaction,getTotal,getPreviousTotal } = transactionSlice.actions
 
 export default transactionSlice.reducer

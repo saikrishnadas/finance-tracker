@@ -13,19 +13,22 @@ function Expenses({ title, color }: ExpensesProps) {
 	const transactions = useSelector(
 		(state: RootState) => state.transaction.transactions
 	);
+	const total = useSelector((state: RootState) => state.transaction.total);
+
+	//Function to calculate percentage and category total.
 	const calculate = () => {
 		let catTotal = 0;
+		let percentage = 0;
 		transactions.forEach((transaction: any) => {
 			if (transaction.transactions.category === title) {
 				catTotal += transaction.transactions.amount;
 			}
 		});
-		return catTotal;
-		// Object.assign({title:title,total:})
+		percentage = Math.floor((catTotal / total) * 100);
+		let cartegoryValues = [catTotal, percentage];
+		return cartegoryValues;
 	};
-	// useEffect(() => {
-	// 	calculate();
-	// });
+
 	return (
 		<div
 			className={`flex justify-between items-center h-20 pr-2 pl-2 rounded-lg ${
@@ -38,10 +41,10 @@ function Expenses({ title, color }: ExpensesProps) {
 		>
 			<div className="flex flex-col ml-5">
 				<p className="font-bold text-gray-400 text-sm">{title}</p>
-				<p className="font-bold ">${calculate()}</p>
+				<p className="font-bold ">${calculate()[0]}</p>
 			</div>
 			<div>
-				<p className="text-orange-600 font-semibold">{0}%</p>
+				<p className="text-orange-600 font-semibold">{calculate()[1]}%</p>
 			</div>
 		</div>
 	);
