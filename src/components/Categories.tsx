@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../store/index";
 import { ApiServicePost } from "../utils/ApiServices";
 import { useNavigate } from "react-router-dom";
+import { addCategory } from "../features/categorySlice";
 
 function Categories() {
 	const [isOpen, setIsOpen] = useState(false);
@@ -16,6 +17,7 @@ function Categories() {
 	const [categories, setCategories] = useState([]);
 	const navigate = useNavigate();
 	const token = useSelector((state: RootState) => state.auth.token);
+	const dispatch = useDispatch();
 
 	const openAddCategoryModal = () => {
 		setIsOpen(true);
@@ -58,6 +60,7 @@ function Categories() {
 					return navigate("/login");
 				}
 				setCategories(data);
+				dispatch(addCategory(data));
 			});
 	};
 

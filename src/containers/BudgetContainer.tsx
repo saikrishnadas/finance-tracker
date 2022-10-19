@@ -7,8 +7,9 @@ import { useSelector } from "react-redux";
 
 function BudgetContainer() {
 	const [isOpen, setIsOpen] = useState(false);
-	const [budget, setBudget] = useState(null);
+	const [budget, setBudget] = useState<any>(null);
 	const token = useSelector((state: RootState) => state.auth.token);
+	const total = useSelector((state: RootState) => state.transaction.total);
 
 	const openBudgetModal = () => {
 		setIsOpen(true);
@@ -49,10 +50,19 @@ function BudgetContainer() {
 				{budget === 0 ? (
 					<p className="flex gap-x-2">Monthly Budget not set</p>
 				) : (
-					<p className="flex gap-x-2">
-						Current Monthly Budget:
-						<p className="font-bold">${budget}</p>
-					</p>
+					<span>
+						{total > budget ? (
+							<p className="flex gap-x-2 text-red-600">
+								Net Spent exceeded monthly Budget
+								<p className="font-bold">${budget}</p>
+							</p>
+						) : (
+							<p className="flex gap-x-2">
+								Current Monthly Budget:
+								<p className="font-bold">${budget}</p>
+							</p>
+						)}
+					</span>
 				)}
 			</div>
 			<MonthlyOverview />

@@ -1,6 +1,21 @@
 import React from "react";
+// @ts-ignore
+import { DeleteIcon } from "@chakra-ui/icons";
+import { ApiServicePost } from "../utils/ApiServices";
+import { useSelector } from "react-redux";
+import { RootState } from "../store/index";
 
-function Record({ color, amount, category, date, note }: any) {
+function Record({ color, amount, category, date, note, id }: any) {
+	const token = useSelector((state: RootState) => state.auth.token);
+	const deleteTransaction = (id: any) => {
+		ApiServicePost("/transaction", "DELETE", { transactionId: id }, token)
+			.then((data: boolean) => {
+				console.log(data);
+			})
+			.catch((err) => {
+				console.log(err);
+			});
+	};
 	return (
 		<div className="flex justify-between items-center mt-5">
 			<div className="flex items-center">
@@ -18,8 +33,13 @@ function Record({ color, amount, category, date, note }: any) {
 					<p className="text-gray-400">{date.replaceAll("/", "-")}</p>
 				</div>
 			</div>
-			<div>
-				<p>${amount}</p>
+			<div className="flex items-center gap-x-2">
+				<div>
+					<p>${amount}</p>
+				</div>
+				<div className="cursor-pointer" onClick={() => deleteTransaction(id)}>
+					<DeleteIcon color="red.500" />
+				</div>
 			</div>
 		</div>
 	);

@@ -1,9 +1,15 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Expenses from "./Expenses";
 import ExpenseCategoryModal from "./Modals/ExpenseCategoryModal";
+import { useSelector } from "react-redux";
+import { RootState } from "../store/index";
 
 function ExpenseOverview() {
 	const [isOpen, setIsOpen] = useState(false);
+	const categories = useSelector(
+		(state: RootState) => state.category.categories
+	);
+	const token = useSelector((state: RootState) => state.auth.token);
 
 	const openCategoryModal = () => {
 		setIsOpen(true);
@@ -24,20 +30,30 @@ function ExpenseOverview() {
 				</p>
 			</span>
 			<div className="grid gap-5 grid-cols-2">
-				<Expenses title="Rent" count={120.42} percentage={42} color="red" />
-				<Expenses title="Food" count={20.2} percentage={12} color="blue" />
-				<Expenses
-					title="Groceries"
-					count={40.42}
-					percentage={32}
-					color="green"
-				/>
-				<Expenses
-					title="Entertainment"
-					count={10.12}
-					percentage={2}
-					color="purple"
-				/>
+				{categories.length > 0 && categories.length < 5 ? (
+					<>
+						{categories.map((category: any) => (
+							<span key={category._id}>
+								<Expenses
+									title={category.categories.title}
+									color={category.categories.color}
+								/>
+							</span>
+						))}
+					</>
+				) : (
+					<>
+						{categories.slice(0, 4).map((category: any) => (
+							<span key={category._id}>
+								<Expenses
+									title={category.categories.title}
+									color={category.categories.color}
+								/>
+							</span>
+						))}
+					</>
+				)}
+
 				<ExpenseCategoryModal isOpen={isOpen} onClose={onClose} />
 			</div>
 		</div>

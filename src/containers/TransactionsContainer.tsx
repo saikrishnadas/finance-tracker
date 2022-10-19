@@ -2,13 +2,16 @@ import Total from "../components/Total";
 import DateTransaction from "./DateTransaction";
 import Record from "../components/Record";
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../store/index";
 import { useNavigate } from "react-router-dom";
+import { addTransaction } from "../features/transactionSlice";
+import { getTotal } from "../features/transactionSlice";
 
 function TransactionsContainer() {
 	const [transactions, setTransactions] = useState([]);
 	const navigate = useNavigate();
+	const dispatch = useDispatch();
 	const token = useSelector((state: RootState) => state.auth.token);
 	const getTransactions = () => {
 		fetch(`${process.env.REACT_APP_LOCAL_URL}/transaction`, {
@@ -26,6 +29,8 @@ function TransactionsContainer() {
 				}
 				if (data.transactions) {
 					setTransactions(data.transactions);
+					dispatch(addTransaction(data.transactions));
+					dispatch(getTotal());
 				}
 			});
 	};
@@ -48,6 +53,7 @@ function TransactionsContainer() {
 							category={transaction.transactions.category}
 							date={transaction.transactions.date}
 							note={transaction.transactions.note}
+							id={transaction._id}
 						/>
 					</span>
 				))}

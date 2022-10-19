@@ -44,14 +44,20 @@ function AddTransactionModal({ isOpen, onClose }: AddTransactionModalProps) {
 	const [amount, setAmount] = useState(0);
 	const [category, setCategory] = useState("");
 	const [note, setNote] = useState("");
-	const [date, setDate] = useState<any>(moment("2014-08-18T21:11:54"));
+	const [date, setDate] = useState(dayjs().startOf("day").format("YYYY-MM-DD"));
 	const initialRef = React.useRef(null);
 	const finalRef = React.useRef(null);
 	const token = useSelector((state: RootState) => state.auth.token);
+	const categories = useSelector(
+		(state: RootState) => state.category.categories
+	);
 
 	const handleDate = (date: any, dateString: any) => {
 		console.log(date, dateString);
-		setDate(dateString);
+		let selectedDate = dayjs(date).format("YYYY-MM-DD");
+		// let test = dayjs(selectedDate);
+		// console.log(test.date());
+		setDate(selectedDate);
 	};
 
 	const handleSubmit = () => {
@@ -62,7 +68,12 @@ function AddTransactionModal({ isOpen, onClose }: AddTransactionModalProps) {
 		ApiServicePost(
 			"/transaction",
 			"POST",
-			{ amount: amount, category: category, date: date, note: note },
+			{
+				amount: amount,
+				category: category,
+				date: date,
+				note: note,
+			},
 			token
 		)
 			.then((data: boolean) => {
@@ -98,8 +109,12 @@ function AddTransactionModal({ isOpen, onClose }: AddTransactionModalProps) {
 						placeholder="Select a Category"
 						onChange={(e: any) => setCategory(e.target.value)}
 					>
-						<option value="rent">Rent</option>
-						<option value="petrol">Petrol</option>
+						{categories.length > 0 &&
+							categories.map((category: any) => (
+								<option key={category._id} value={category.categories.title}>
+									{category.categories.title}
+								</option>
+							))}
 					</Select>
 				</FormControl>
 
