@@ -85,8 +85,8 @@ function AddTransactionModal({ isOpen, onClose }: AddTransactionModalProps) {
 					month: month,
 					year: year,
 					date: date,
-					type: type,
 				},
+				type: type,
 				note: note,
 			},
 			token

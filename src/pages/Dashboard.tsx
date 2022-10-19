@@ -15,6 +15,12 @@ import { RootState } from "../store/index";
 function Dashboard() {
 	const [isAuth, setIsAuth] = useState(false);
 	const token = useSelector((state: RootState) => state.auth.token);
+	const debitsCount = useSelector(
+		(state: RootState) => state.transaction.debitsCount
+	);
+	const creditsCount = useSelector(
+		(state: RootState) => state.transaction.debitsCount
+	);
 	const handleLogout = () => {
 		fetch(`{process.env.REACT_APP_LOCAL_URL}/logout`, {
 			method: "POST",
@@ -38,8 +44,8 @@ function Dashboard() {
 				</div>
 				<div className="block lg:flex">
 					<div className="flex lg:flex-col gap-x-8 ml-5 lg:gap-y-5 lg:ml-10 mt-10">
-						<Count title="New Debits" count={54} percentage={18.7} />
-						<Count title="New Credits" count={21} percentage={8.7} />
+						<Count title="Debits" count={debitsCount} percentage={0} />
+						<Count title="Credits" count={creditsCount} percentage={0} />
 					</div>
 					<div className="hidden lg:flex lg:items-end lg:ml-10">
 						<ExpenseGraph />

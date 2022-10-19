@@ -6,6 +6,9 @@ import AddTransactionModal from "../components/Modals/AddTransactionModal";
 import { Dropdown, Menu, Space, DatePicker } from "antd";
 import dayjs from "dayjs";
 import moment from "moment";
+import { Icon } from "@chakra-ui/react";
+import { MdAddCircle } from "react-icons/md";
+import { SlCalender } from "react-icons/sl";
 
 function DateTransaction({ filterTransaction }: any) {
 	const [isOpen, setIsOpen] = useState(false);
@@ -15,8 +18,8 @@ function DateTransaction({ filterTransaction }: any) {
 	const handleDate = (date: any, dateString: any) => {
 		console.log(date, dateString);
 		let selectedDate = dayjs(date).format("YYYY-MM-DD");
-		let day = selectedDate.split("-")[2];
-		filterTransaction("day", +day);
+		let month = selectedDate.split("-")[1];
+		filterTransaction("month", +month);
 		setVisible(false);
 	};
 
@@ -59,8 +62,7 @@ function DateTransaction({ filterTransaction }: any) {
 							<p>Custom</p>
 							{show && (
 								<DatePicker
-									defaultValue={moment(moment().toDate(), "DD/MM/YYYY")}
-									format="DD/MM/YYYY"
+									picker="month"
 									onChange={handleDate}
 									autoFocus={true}
 									style={{ width: "100%", height: "40px", borderRadius: "5px" }}
@@ -94,12 +96,20 @@ function DateTransaction({ filterTransaction }: any) {
 						placement="bottom"
 						open={visible}
 					>
-						<CalendarIcon
+						<Icon
+							as={SlCalender}
+							w={5}
+							h={5}
+							color="blue.600"
 							className="cursor-pointer"
 							onClick={() => setVisible(true)}
 						/>
 					</Dropdown>
-					<WarningIcon
+					<Icon
+						as={MdAddCircle}
+						w={6}
+						h={6}
+						color="blue.600"
 						onClick={openAddTransactionModal}
 						className="cursor-pointer"
 					/>

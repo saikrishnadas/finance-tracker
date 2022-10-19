@@ -40,10 +40,12 @@ function ExpenseCategoryModal({ isOpen, onClose }: ExpenseCategoryModalProps) {
 							{categories &&
 								categories.map((category: any) => (
 									<span key={category._id}>
-										<Expenses
-											title={category.categories.title}
-											color={category.categories.color}
-										/>
+										{category.categories.type !== "Income" && (
+											<Expenses
+												title={category.categories.title}
+												color={category.categories.color}
+											/>
+										)}
 									</span>
 								))}
 						</div>

@@ -6,7 +6,14 @@ import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../store/index";
 import { useNavigate } from "react-router-dom";
 import { addTransaction } from "../features/transactionSlice";
-import { getTotal, getPreviousTotal } from "../features/transactionSlice";
+import {
+	getTotalExpense,
+	getPreviousTotalExpense,
+	getTotalIncome,
+	getPreviousTotalIncome,
+	getDebitsCount,
+	getCreditCount,
+} from "../features/transactionSlice";
 import { CalendarIcon, WarningIcon, Search2Icon } from "@chakra-ui/icons";
 import dayjs from "dayjs";
 
@@ -35,9 +42,13 @@ function TransactionsContainer() {
 				if (data.transactions) {
 					setTransaction(data.transactions);
 					dispatch(addTransaction(data.transactions));
-					dispatch(getTotal());
+					dispatch(getTotalExpense());
+					dispatch(getTotalIncome());
 					let month = dayjs().month();
-					dispatch(getPreviousTotal(month));
+					dispatch(getPreviousTotalExpense(month));
+					dispatch(getPreviousTotalIncome(month));
+					dispatch(getDebitsCount());
+					dispatch(getCreditCount());
 				}
 			});
 	};
@@ -52,7 +63,7 @@ function TransactionsContainer() {
 			setTransaction(filteredTransaction);
 		} else if (type === "month") {
 			let filteredTransaction = transactions.filter(
-				(transaction: any) => transaction.transactions.date.month === value + 1
+				(transaction: any) => transaction.transactions.date.month === value
 			);
 			console.log(filteredTransaction);
 			setTransaction(filteredTransaction);
@@ -68,11 +79,12 @@ function TransactionsContainer() {
 			<DateTransaction filterTransaction={filterTransaction} />
 			<Total />
 			<div className="w-[100%] h-[0.5px] bg-gray-300 mt-5" />
-			<div className="pr-5 scrollbar-thumb-blue-600 scrollbar-track-gray-100 scrollbar-thin overflow-auto h-[24em] max-h-[24em]">
+			<div className="pr-5 scrollbar-thumb-blue-600 scrollbar-track-gray-100 scrollbar-thin overflow-auto h-[32em] max-h-[32em]">
 				{transaction.map((transaction: any) => (
 					<span key={transaction._id}>
 						<Record
-							color="red"
+							// color="red"
+							type={transaction.transactions.type}
 							amount={transaction.transactions.amount}
 							category={transaction.transactions.category}
 							date={transaction.transactions.date}

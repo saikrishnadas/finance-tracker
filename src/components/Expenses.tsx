@@ -13,7 +13,9 @@ function Expenses({ title, color }: ExpensesProps) {
 	const transactions = useSelector(
 		(state: RootState) => state.transaction.transactions
 	);
-	const total = useSelector((state: RootState) => state.transaction.total);
+	const totalExpense = useSelector(
+		(state: RootState) => state.transaction.totalExpense
+	);
 
 	//Function to calculate percentage and category total.
 	const calculate = () => {
@@ -24,7 +26,7 @@ function Expenses({ title, color }: ExpensesProps) {
 				catTotal += transaction.transactions.amount;
 			}
 		});
-		percentage = Math.floor((catTotal / total) * 100);
+		percentage = Math.floor((catTotal / totalExpense) * 100);
 		let cartegoryValues = [catTotal, percentage];
 		return cartegoryValues;
 	};

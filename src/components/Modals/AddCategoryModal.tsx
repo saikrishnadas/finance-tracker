@@ -18,6 +18,7 @@ import {
 } from "@chakra-ui/react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../store/index";
+import { Radio } from "antd";
 
 interface AddCategoryModalProps {
 	isOpen: boolean;
@@ -27,6 +28,7 @@ interface AddCategoryModalProps {
 function AddCategoryModal({ isOpen, onClose }: AddCategoryModalProps) {
 	const [name, setName] = useState("");
 	const [color, setColor] = useState("");
+	const [type, setType] = useState("Expense");
 	const initialRef = React.useRef(null);
 	const finalRef = React.useRef(null);
 	const token = useSelector((state: RootState) => state.auth.token);
@@ -35,7 +37,12 @@ function AddCategoryModal({ isOpen, onClose }: AddCategoryModalProps) {
 		console.log(name);
 		console.log(color);
 		// categories.push({ title: name, color: color });
-		ApiServicePost("/categories", "POST", { title: name, color: color }, token)
+		ApiServicePost(
+			"/categories",
+			"POST",
+			{ title: name, color: color, type: type },
+			token
+		)
 			.then((data: boolean) => {
 				console.log(data);
 			})
@@ -86,6 +93,16 @@ function AddCategoryModal({ isOpen, onClose }: AddCategoryModalProps) {
 								<option value="pink">Pink</option>
 								<option value="yellow">Yellow</option>
 							</Select>
+						</FormControl>
+						<FormControl mt={4}>
+							<FormLabel>Type</FormLabel>
+							<Radio.Group
+								onChange={(e: any) => setType(e.target.value)}
+								value={type}
+							>
+								<Radio value="Expense">Expense</Radio>
+								<Radio value="Income">Income</Radio>
+							</Radio.Group>
 						</FormControl>
 					</ModalBody>
 

@@ -4,8 +4,10 @@ import { DeleteIcon } from "@chakra-ui/icons";
 import { ApiServicePost } from "../utils/ApiServices";
 import { useSelector } from "react-redux";
 import { RootState } from "../store/index";
+import { ArrowUpIcon, ArrowDownIcon } from "@chakra-ui/icons";
+import { Icon } from "@chakra-ui/react";
 
-function Record({ color, amount, category, date, note, id }: any) {
+function Record({ color, amount, category, date, note, id, type }: any) {
 	const token = useSelector((state: RootState) => state.auth.token);
 	const deleteTransaction = (id: any) => {
 		ApiServicePost("/transaction", "DELETE", { transactionId: id }, token)
@@ -19,7 +21,7 @@ function Record({ color, amount, category, date, note, id }: any) {
 	return (
 		<div className="flex justify-between items-center mt-5">
 			<div className="flex items-center">
-				<div
+				{/* <div
 					className={`w-10 h-10 bg-red-500 rounded-lg ${
 						color === "red" && "bg-red-500"
 					} ${color === "blue" && "bg-blue-500"} ${
@@ -27,7 +29,13 @@ function Record({ color, amount, category, date, note, id }: any) {
 					} ${color === "purple" && "bg-purple-500"} ${
 						color === "yellow" && "bg-yellow-500"
 					} ${color === "pink" && "bg-pink-500"}`}
-				/>
+				/> */}
+				{type !== "Income" ? (
+					<Icon as={ArrowUpIcon} w={6} h={6} color="red.500" />
+				) : (
+					<Icon as={ArrowDownIcon} w={6} h={6} color="green.500" />
+				)}
+
 				<div className="flex flex-col ml-5">
 					<p className="font-bold capitalize">{category}</p>
 					<p className="text-gray-400">{date.date.replaceAll("/", "-")}</p>

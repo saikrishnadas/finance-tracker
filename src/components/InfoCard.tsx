@@ -20,7 +20,7 @@ import {
 
 interface InfoCardProps {
 	title: string;
-	count: string;
+	count: any;
 	icon: any;
 }
 

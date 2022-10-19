@@ -9,8 +9,12 @@ import type { PayloadAction } from '@reduxjs/toolkit'
 
 const initialState: any = {
     transactions:[],
-    total:0,
-    previousTotal:0
+    totalExpense:0,
+    totalIncome:0,
+    previousTotalExpense:0,
+    previousTotalIncome:0,
+    debitsCount:0,
+    creditsCount:0
 }
 export const transactionSlice = createSlice({
   name: 'transaction',
@@ -23,27 +27,72 @@ export const transactionSlice = createSlice({
       // immutable state based off those changes
       state.transactions =  action.payload;
     },
-    getTotal: (state) => {
+    getTotalExpense: (state) => {
         let total = 0;
         state.transactions.forEach((transaction:any) => {
-            total += transaction.transactions.amount;
-        });
-        state.total = total;
-      },
-      getPreviousTotal: (state,action) => {
-        let total = 0;
-        state.transactions.forEach((transaction:any) => {
-          if(transaction.transactions.date.month === action.payload){
-
+          if(transaction.transactions.type==="Expense"){
             total += transaction.transactions.amount;
           }
         });
-        state.previousTotal = total;
+        state.totalExpense = total;
+      },
+      getTotalIncome: (state) => {
+        let total = 0;
+        state.transactions.forEach((transaction:any) => {
+          if(transaction.transactions.type==="Income"){
+            total += transaction.transactions.amount;
+          }
+        });
+        state.totalIncome = total;
+      },
+      getPreviousTotalExpense: (state,action) => {
+        let total = 0;
+        state.transactions.forEach((transaction:any) => {
+          if(transaction.transactions.date.month === action.payload){
+            if(transaction.transactions.type==="Expense"){
+              total += transaction.transactions.amount;
+
+            }
+
+          }
+        });
+        state.previousTotalExpense = total;
+      },
+      getPreviousTotalIncome: (state,action) => {
+        let total = 0;
+        state.transactions.forEach((transaction:any) => {
+          if(transaction.transactions.date.month === action.payload){
+            if(transaction.transactions.type==="Income"){
+              total += transaction.transactions.amount;
+
+            }
+
+          }
+        });
+        state.previousTotalIncome = total;
+      },
+      getDebitsCount: (state) => {
+        let count = 0;
+        state.transactions.forEach((transaction:any) => {
+          if(transaction.transactions.type==="Expense"){
+            count += 1;
+          }
+        });
+        state.debitsCount = count;
+      },
+      getCreditCount: (state) => {
+        let count = 0;
+        state.transactions.forEach((transaction:any) => {
+          if(transaction.transactions.type!=="Expense"){
+            count += 1;
+          }
+        });
+        state.creditsCount = count;
       },
   },
 })
 
 // Action creators are generated for each case reducer function
-export const { addTransaction,getTotal,getPreviousTotal } = transactionSlice.actions
+export const { addTransaction,getTotalExpense,getTotalIncome,getPreviousTotalExpense,getPreviousTotalIncome,getDebitsCount,getCreditCount } = transactionSlice.actions
 
 export default transactionSlice.reducer

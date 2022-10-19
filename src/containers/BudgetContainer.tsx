@@ -9,7 +9,9 @@ function BudgetContainer() {
 	const [isOpen, setIsOpen] = useState(false);
 	const [budget, setBudget] = useState<any>(null);
 	const token = useSelector((state: RootState) => state.auth.token);
-	const total = useSelector((state: RootState) => state.transaction.total);
+	const totalExpense = useSelector(
+		(state: RootState) => state.transaction.totalExpense
+	);
 
 	const openBudgetModal = () => {
 		setIsOpen(true);
@@ -51,7 +53,7 @@ function BudgetContainer() {
 					<p className="flex gap-x-2">Monthly Budget not set</p>
 				) : (
 					<span>
-						{total > budget ? (
+						{totalExpense > budget ? (
 							<p className="flex gap-x-2 text-red-600">
 								Net Spent exceeded monthly Budget
 								<p className="font-bold">${budget}</p>
