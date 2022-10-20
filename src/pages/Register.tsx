@@ -12,6 +12,7 @@ import {
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { Form } from "antd";
 
 function Register() {
 	const navigate = useNavigate();
@@ -61,7 +62,7 @@ function Register() {
 				</div>
 			)}
 			<div className="flex flex-col justify-center items-center min-h-[100vh]">
-				<div className="w-[23em] h-[29em] lg:w-[41em] lg:h-[32em] border-2 rounded-lg">
+				<div className="w-[23em] h-[29em] lg:w-[41em] lg:h-[33em] border-2 rounded-lg">
 					<div className="flex flex-col items-center">
 						<div className="flex justify-center">
 							<div className="flex flex-col">
@@ -70,68 +71,111 @@ function Register() {
 								</p>
 							</div>
 						</div>
-						<FormControl isInvalid={isEmailError} className="mt-5">
-							<div className="flex justify-center">
-								<div className="flex flex-col items-start">
-									<FormLabel>Email</FormLabel>
-									<div className="lg:w-[30vw]">
-										<Input
-											type="email"
-											value={email}
-											onChange={(e: any) => setEmail(e.target.value)}
-										/>
-									</div>
-									{!isEmailError ? (
-										<FormHelperText>
-											We'll never share your email.
-										</FormHelperText>
-									) : (
-										<FormErrorMessage>Email is required.</FormErrorMessage>
-									)}
-								</div>
-							</div>
-						</FormControl>
-						<FormControl isInvalid={isPasswordError} className="mt-5">
-							<div className="flex justify-center">
-								<div className="flex flex-col items-start">
-									<FormLabel>Password</FormLabel>
-									<div className="lg:w-[30vw]">
-										<Input
-											type="password"
-											value={password}
-											onChange={(e: any) => setPassword(e.target.value)}
-										/>
-									</div>
-									{isPasswordError && (
-										<FormErrorMessage>Password is required.</FormErrorMessage>
-									)}
-								</div>
-							</div>
-						</FormControl>
-						<FormControl isInvalid={isConfirmPasswordError} className="mt-5">
-							<div className="flex justify-center">
-								<div className="flex flex-col items-start">
-									<FormLabel>Confirm Password</FormLabel>
-									<div className="lg:w-[30vw]">
-										<Input
-											type="password"
-											value={confirmPassword}
-											onChange={(e: any) => setConfirmPassword(e.target.value)}
-										/>
-									</div>
-									{isConfirmPasswordError && (
-										<FormErrorMessage>Password is required.</FormErrorMessage>
-									)}
-								</div>
-							</div>
-						</FormControl>
-						<Button
-							colorScheme="brandButton"
-							className="mt-5"
-							onClick={onFinish}
+						<Form
+							name="register"
+							// labelCol={{ span: 8 }}
+							// wrapperCol={{ span: 16 }}
+							// initialValues={{ remember: true }}
+							onFinish={onFinish}
+							//   onFinishFailed={onFinishFailed}
+							// autoComplete="off"
 						>
-							Register
-						</Button>
+							<FormControl className="mt-5">
+								<div className="flex justify-center">
+									<div className="flex flex-col items-start">
+										<FormLabel>Email</FormLabel>
+										<div className="lg:w-[30vw]">
+											<Form.Item
+												// label="Username"
+												name="email"
+												rules={[
+													{
+														required: true,
+														message: "Please enter your email!",
+													},
+												]}
+											>
+												<Input
+													type="email"
+													value={email}
+													onChange={(e: any) => setEmail(e.target.value)}
+												/>
+											</Form.Item>
+										</div>
+										{/* {!isEmailError ? (
+											
+										) : (
+											<FormErrorMessage>Email is required.</FormErrorMessage>
+										)} */}
+									</div>
+								</div>
+							</FormControl>
+							<FormControl>
+								<div className="flex justify-center">
+									<div className="flex flex-col items-start">
+										<FormLabel>Password</FormLabel>
+										<div className="lg:w-[30vw]">
+											<Form.Item
+												// label="Username"
+												name="password"
+												rules={[
+													{
+														required: true,
+														message: "Please enter your password!",
+													},
+												]}
+											>
+												<Input
+													type="password"
+													value={password}
+													onChange={(e: any) => setPassword(e.target.value)}
+												/>
+											</Form.Item>
+										</div>
+										{/* {isPasswordError && (
+											<FormErrorMessage>Password is required.</FormErrorMessage>
+										)} */}
+									</div>
+								</div>
+							</FormControl>
+							<FormControl>
+								<div className="flex justify-center">
+									<div className="flex flex-col items-start">
+										<FormLabel>Confirm Password</FormLabel>
+										<div className="lg:w-[30vw]">
+											<Form.Item
+												// label="Username"
+												name="confirmPassword"
+												rules={[
+													{
+														required: true,
+														message: "Please enter password again!",
+													},
+												]}
+											>
+												<Input
+													type="password"
+													value={confirmPassword}
+													onChange={(e: any) =>
+														setConfirmPassword(e.target.value)
+													}
+												/>
+											</Form.Item>
+										</div>
+									</div>
+								</div>
+							</FormControl>
+							<Form.Item className="w-[100%] flex justify-center">
+								<Button
+									colorScheme="brandButton"
+									className="mt-5"
+									// onClick={onFinish}
+									type="submit"
+								>
+									Register
+								</Button>
+							</Form.Item>
+						</Form>
 					</div>
 				</div>
 				<div className="text-black mt-5 flex">
