@@ -31,7 +31,7 @@ import TextField from "@mui/material/TextField";
 import type { DatePickerProps } from "antd";
 import { DatePicker, Space, Radio } from "antd";
 import "antd/dist/antd.css";
-import { Modal } from "antd";
+import { Modal, Form } from "antd";
 import { width } from "@mui/system";
 import moment from "moment";
 
@@ -108,68 +108,139 @@ function AddTransactionModal({ isOpen, onClose }: AddTransactionModalProps) {
 				onCancel={onClose}
 				footer={null}
 			>
-				<FormControl>
-					<FormLabel>Amount</FormLabel>
-					<Input
-						type="number"
-						ref={initialRef}
-						placeholder="Enter Amount"
-						onChange={(e: any) => setAmount(e.target.value)}
-					/>
-				</FormControl>
+				<Form
+					name="addTransaction"
+					// labelCol={{ span: 8 }}
+					// wrapperCol={{ span: 16 }}
+					// initialValues={{ remember: true }}
+					onFinish={handleSubmit}
+					//   onFinishFailed={onFinishFailed}
+					// autoComplete="off"
+				>
+					<FormControl>
+						<FormLabel>Amount</FormLabel>
+						<Form.Item
+							// label="Username"
+							name="amount"
+							rules={[
+								{
+									required: true,
+									message: "Please enter the amount!",
+								},
+							]}
+						>
+							<Input
+								type="number"
+								ref={initialRef}
+								placeholder="Enter Amount"
+								onChange={(e: any) => setAmount(e.target.value)}
+							/>
+						</Form.Item>
+					</FormControl>
 
-				<FormControl mt={4}>
-					<FormLabel>Category</FormLabel>
-					<Select
-						placeholder="Select a Category"
-						onChange={(e: any) => setCategory(e.target.value)}
-					>
-						{categories.length > 0 &&
-							categories.map((category: any) => (
-								<option key={category._id} value={category.categories.title}>
-									{category.categories.title}
-								</option>
-							))}
-					</Select>
-				</FormControl>
+					<FormControl mt={4}>
+						<FormLabel>Category</FormLabel>
+						<Form.Item
+							// label="Username"
+							name="category"
+							rules={[
+								{
+									required: true,
+									message: "Please select a category!",
+								},
+							]}
+						>
+							<Select
+								placeholder="Select a Category"
+								onChange={(e: any) => setCategory(e.target.value)}
+							>
+								{categories.length > 0 &&
+									categories.map((category: any) => (
+										<option
+											key={category._id}
+											value={category.categories.title}
+										>
+											{category.categories.title}
+										</option>
+									))}
+							</Select>
+						</Form.Item>
+					</FormControl>
 
-				<FormControl mt={4}>
-					<FormLabel>Date</FormLabel>
-					<DatePicker
-						defaultValue={moment(moment().toDate(), "DD/MM/YYYY")}
-						format="DD/MM/YYYY"
-						onChange={handleDate}
-						autoFocus={true}
-						style={{ width: "100%", height: "40px", borderRadius: "5px" }}
-						placement="bottomRight"
-					/>
-				</FormControl>
-				<FormControl mt={4}>
-					<FormLabel>Type</FormLabel>
-					<Radio.Group
-						onChange={(e: any) => setType(e.target.value)}
-						value={type}
-					>
-						<Radio value="Expense">Expense</Radio>
-						<Radio value="Income">Income</Radio>
-					</Radio.Group>
-				</FormControl>
+					<FormControl mt={4}>
+						<FormLabel>Date</FormLabel>
+						<Form.Item
+							// label="Username"
+							name="date"
+							rules={[
+								{
+									required: false,
+									message: "Please select the date!",
+								},
+							]}
+						>
+							<DatePicker
+								allowClear={false}
+								defaultValue={moment(moment().toDate(), "DD/MM/YYYY")}
+								format="DD/MM/YYYY"
+								onChange={handleDate}
+								autoFocus={true}
+								style={{ width: "100%", height: "40px", borderRadius: "5px" }}
+								placement="bottomRight"
+							/>
+						</Form.Item>
+					</FormControl>
+					<FormControl mt={4}>
+						<FormLabel>Type</FormLabel>
+						<Form.Item
+							// label="Username"
+							name="type"
+							rules={[
+								{
+									required: true,
+									message: "Please select a type!",
+								},
+							]}
+						>
+							<Radio.Group
+								onChange={(e: any) => setType(e.target.value)}
+								value={type}
+							>
+								<Radio value="Expense">Expense</Radio>
+								<Radio value="Income">Income</Radio>
+							</Radio.Group>
+						</Form.Item>
+					</FormControl>
 
-				<FormControl mt={4}>
-					<FormLabel>Note</FormLabel>
-					<Input
-						placeholder="Note (Optional)"
-						onChange={(e: any) => setNote(e.target.value)}
-					/>
-				</FormControl>
-				<div className="w-[100%] flex justify-end">
-					<Button colorScheme="blue" mt={4} mr={3} onClick={handleSubmit}>
-						Save
-					</Button>
-					<Button onClick={onClose} mt={4}>
-						Cancel
-					</Button>
-				</div>
+					<FormControl mt={4}>
+						<FormLabel>Note</FormLabel>
+						<Form.Item
+							// label="Username"
+							name="note"
+							rules={[
+								{
+									required: true,
+									message: "Please enter a note!",
+								},
+							]}
+						>
+							<Input
+								placeholder="Note (Optional)"
+								onChange={(e: any) => setNote(e.target.value)}
+							/>
+						</Form.Item>
+					</FormControl>
+					<div className="w-[100%] flex justify-end">
+						<Form.Item>
+							<Button colorScheme="blue" mt={4} mr={3} type="submit">
+								Save
+							</Button>
+							<Button onClick={onClose} mt={4}>
+								Cancel
+							</Button>
+						</Form.Item>
+					</div>
+				</Form>
 			</Modal>
 		</>
 	);

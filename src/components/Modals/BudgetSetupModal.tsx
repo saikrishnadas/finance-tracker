@@ -16,6 +16,7 @@ import {
 import { getCsrfToken, ApiServicePost } from "../../utils/ApiServices";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store/index";
+import { Form } from "antd";
 
 interface EditCategoryModalProps {
 	isOpen: boolean;
@@ -63,23 +64,46 @@ function BudgetSetupModal({ isOpen, onClose }: EditCategoryModalProps) {
 				<ModalContent>
 					<ModalHeader>Monthly Budget</ModalHeader>
 					<ModalCloseButton />
-					<ModalBody pb={6}>
-						<FormControl>
-							<FormLabel>Enter Monthly Budget</FormLabel>
-							<Input
-								ref={initialRef}
-								placeholder="Monthly Budget"
-								onChange={(e: any) => setCount(e.target.value)}
-							/>
-						</FormControl>
-					</ModalBody>
+					<Form
+						name="budget"
+						// labelCol={{ span: 8 }}
+						// wrapperCol={{ span: 16 }}
+						// initialValues={{ remember: true }}
+						onFinish={handleSubmit}
+						//   onFinishFailed={onFinishFailed}
+						// autoComplete="off"
+					>
+						<ModalBody pb={6}>
+							<FormControl>
+								<FormLabel>Enter Monthly Budget</FormLabel>
+								<Form.Item
+									// label="Username"
+									name="count"
+									rules={[
+										{
+											required: true,
+											message: "Please enter a amount!",
+										},
+									]}
+								>
+									<Input
+										ref={initialRef}
+										placeholder="Monthly Budget"
+										onChange={(e: any) => setCount(e.target.value)}
+									/>
+								</Form.Item>
+							</FormControl>
+						</ModalBody>
 
-					<ModalFooter>
-						<Button colorScheme="blue" mr={3} onClick={handleSubmit}>
-							Save
-						</Button>
-						<Button onClick={onClose}>Cancel</Button>
-					</ModalFooter>
+						<ModalFooter>
+							<Form.Item>
+								<Button colorScheme="blue" mr={3} type="submit">
+									Save
+								</Button>
+								<Button onClick={onClose}>Cancel</Button>
+							</Form.Item>
+						</ModalFooter>
+					</Form>
 				</ModalContent>
 			</Modal>
 		</>

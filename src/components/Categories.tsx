@@ -87,9 +87,9 @@ function Categories() {
 								} ${cat.categories.color === "pink" && "bg-pink-500"}`}
 							/>
 							<p>{cat.categories.title}</p>
-							<span className="cursor-pointer" onClick={openEditCategoryModal}>
+							{/* <span className="cursor-pointer" onClick={openEditCategoryModal}>
 								<EditIcon color="blue.600" />
-							</span>
+							</span> */}
 							<span
 								className="cursor-pointer"
 								onClick={() => deleteCategory(cat._id)}

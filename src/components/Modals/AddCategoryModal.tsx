@@ -18,7 +18,7 @@ import {
 } from "@chakra-ui/react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../store/index";
-import { Radio } from "antd";
+import { Radio, Form } from "antd";
 
 interface AddCategoryModalProps {
 	isOpen: boolean;
@@ -70,48 +70,93 @@ function AddCategoryModal({ isOpen, onClose }: AddCategoryModalProps) {
 				<ModalContent>
 					<ModalHeader>Add Category</ModalHeader>
 					<ModalCloseButton />
-					<ModalBody pb={6}>
-						<FormControl>
-							<FormLabel>Category Name</FormLabel>
-							<Input
-								ref={initialRef}
-								placeholder="Enter Category Name"
-								onChange={(e: any) => setName(e.target.value)}
-							/>
-						</FormControl>
+					<Form
+						name="addCategory"
+						// labelCol={{ span: 8 }}
+						// wrapperCol={{ span: 16 }}
+						// initialValues={{ remember: true }}
+						onFinish={handleSubmit}
+						//   onFinishFailed={onFinishFailed}
+						// autoComplete="off"
+					>
+						<ModalBody pb={6}>
+							<FormControl>
+								<FormLabel>Category Name</FormLabel>
+								<Form.Item
+									// label="Username"
+									name="name"
+									rules={[
+										{
+											required: true,
+											message: "Please enter category name!",
+										},
+									]}
+								>
+									<Input
+										ref={initialRef}
+										placeholder="Enter Category Name"
+										onChange={(e: any) => setName(e.target.value)}
+									/>
+								</Form.Item>
+							</FormControl>
 
-						<FormControl mt={4}>
-							<FormLabel>Category Color</FormLabel>
-							<Select
-								placeholder="Select a Color"
-								onChange={(e: any) => setColor(e.target.value)}
-							>
-								<option value="red">Red</option>
-								<option value="blue">Blue</option>
-								<option value="green">Green</option>
-								<option value="purple">Purple</option>
-								<option value="pink">Pink</option>
-								<option value="yellow">Yellow</option>
-							</Select>
-						</FormControl>
-						<FormControl mt={4}>
-							<FormLabel>Type</FormLabel>
-							<Radio.Group
-								onChange={(e: any) => setType(e.target.value)}
-								value={type}
-							>
-								<Radio value="Expense">Expense</Radio>
-								<Radio value="Income">Income</Radio>
-							</Radio.Group>
-						</FormControl>
-					</ModalBody>
+							<FormControl mt={4}>
+								<FormLabel>Category Color</FormLabel>
+								<Form.Item
+									// label="Username"
+									name="color"
+									rules={[
+										{
+											required: true,
+											message: "Please select a color!",
+										},
+									]}
+								>
+									<Select
+										placeholder="Select a Color"
+										onChange={(e: any) => setColor(e.target.value)}
+									>
+										<option value="red">Red</option>
+										<option value="blue">Blue</option>
+										<option value="green">Green</option>
+										<option value="purple">Purple</option>
+										<option value="pink">Pink</option>
+										<option value="yellow">Yellow</option>
+									</Select>
+								</Form.Item>
+							</FormControl>
+							<FormControl mt={4}>
+								<FormLabel>Type</FormLabel>
+								<Form.Item
+									// label="Username"
+									name="type"
+									rules={[
+										{
+											required: true,
+											message: "Please select a type!",
+										},
+									]}
+								>
+									<Radio.Group
+										onChange={(e: any) => setType(e.target.value)}
+										value={type}
+									>
+										<Radio value="Expense">Expense</Radio>
+										<Radio value="Income">Income</Radio>
+									</Radio.Group>
+								</Form.Item>
+							</FormControl>
+						</ModalBody>
 
-					<ModalFooter>
-						<Button colorScheme="blue" mr={3} onClick={handleSubmit}>
-							Save
-						</Button>
-						<Button onClick={onClose}>Cancel</Button>
-					</ModalFooter>
+						<ModalFooter>
+							<Form.Item>
+								<Button colorScheme="blue" mr={3} type="submit">
+									Save
+								</Button>
+								<Button onClick={onClose}>Cancel</Button>
+							</Form.Item>
+						</ModalFooter>
+					</Form>
 				</ModalContent>
 			</Modal>
 		</>
