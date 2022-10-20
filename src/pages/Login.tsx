@@ -86,15 +86,12 @@ function Login() {
 				>
 					Click here to get sample test user
 				</p>
-				<div className="w-[23em] h-[23em] lg:w-[41em] lg:h-[23.875em] bg-white rounded-lg">
+				<div className="w-[23em] h-[23em] lg:w-[41em] lg:h-[25.5em] border-2 rounded-lg">
 					<div className="flex flex-col items-center">
 						<div className="flex justify-center">
 							<div className="flex flex-col">
 								<p className="text-2xl lg:text-4xl font-bold text-center mt-2 lg:mt-5">
 									Welcome Back
-								</p>
-								<p className="text-xs lg:text-sm font-bold text-gray-400 mt-2">
-									Enter your crendentials to access a book
 								</p>
 							</div>
 						</div>
@@ -136,12 +133,16 @@ function Login() {
 								</div>
 							</div>
 						</FormControl>
-						<Button colorScheme="brand" className="mt-5" onClick={onFinish}>
+						<Button
+							colorScheme="brandButton"
+							className="mt-5"
+							onClick={onFinish}
+						>
 							Login
 						</Button>
 					</div>
 				</div>
-				<div className="text-white mt-5 flex">
+				<div className="text-black mt-5 flex">
 					Don't have an account?
 					<Link to="/register">
 						<p className="ml-2 text-blue-600 underline cursor-pointer">

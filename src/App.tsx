@@ -12,10 +12,15 @@ import PageNotFound404 from "./pages/PageNotFound404";
 function App() {
 	const theme = extendTheme({
 		colors: {
-			brand: {
-				// 50: "#29315A",
-				// 100: "#29315A",
-				// 500: "#29315A",
+			// brand: {
+			// 	50: "#29315A",
+			// 	100: "#29315A",
+			// 	500: "#29315A",
+			// },
+			brandButton: {
+				50: "#0000FF",
+				100: "#0000FF",
+				500: "#0000FF",
 			},
 		},
 	});
