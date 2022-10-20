@@ -13,7 +13,7 @@ function Profile() {
 	return (
 		<>
 			<span onClick={openUpdateProfileModal}>
-				<Avatar name="Dan Abrahmov" src="https://bit.ly/dan-abramov" />
+				<Avatar name="saikrishnadas666@gmail.com" />
 			</span>
 			<UpdateProfile isOpen={isOpen} onClose={onClose} />
 		</>
