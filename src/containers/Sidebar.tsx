@@ -7,7 +7,7 @@ import MobileMenu from "./MobileMenu";
 
 function Sidebar() {
 	return (
-		<div className="h-[10vh] w-[100wv] lg:h-[100vh] lg:w-[5em] flex items-center lg:items-start lg:flex-col pt-4 pr-2 lg:pr-0 lg:pt-5 pb-5">
+		<div className="h-[10vh] w-[100wv] lg:h-[100vh] flex items-center lg:flex-col pt-4 pr-2 lg:pr-0 lg:pt-5 pb-5">
 			<div className="flex pl-2 lg:hidden">
 				<MobileMenu />
 			</div>

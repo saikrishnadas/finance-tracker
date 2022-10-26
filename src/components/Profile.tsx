@@ -12,10 +12,10 @@ function Profile() {
 	};
 	return (
 		<>
-			<span onClick={openUpdateProfileModal}>
+			<span>
 				<Avatar name="saikrishnadas666@gmail.com" />
 			</span>
-			<UpdateProfile isOpen={isOpen} onClose={onClose} />
+			{/* <UpdateProfile isOpen={isOpen} onClose={onClose} /> */}
 		</>
 	);
 }

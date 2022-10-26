@@ -213,13 +213,13 @@ function AddTransactionModal({ isOpen, onClose }: AddTransactionModalProps) {
 					</FormControl>
 
 					<FormControl mt={4}>
-						<FormLabel>Note</FormLabel>
+						<FormLabel>{`Note (Optional)`}</FormLabel>
 						<Form.Item
 							// label="Username"
 							name="note"
 							rules={[
 								{
-									required: true,
+									required: false,
 									message: "Please enter a note!",
 								},
 							]}

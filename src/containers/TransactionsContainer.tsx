@@ -65,7 +65,7 @@ function TransactionsContainer() {
 			let filteredTransaction = transactions.filter(
 				(transaction: any) => transaction.transactions.date.month === value
 			);
-			console.log(filteredTransaction);
+			console.log("filteredTransaction => ", filteredTransaction);
 			setTransaction(filteredTransaction);
 		}
 	};

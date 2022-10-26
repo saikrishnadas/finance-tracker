@@ -41,9 +41,9 @@ function InfoCard({ title, count, icon }: InfoCardProps) {
 						/>
 						<MenuList>
 							<MenuItem icon={<WarningIcon />}>Report Issue</MenuItem>
-							{title === "Your bank balance" && (
+							{/* {title === "Your bank balance" && (
 								<MenuItem icon={<AddIcon />}>Update Balance</MenuItem>
-							)}
+							)} */}
 						</MenuList>
 					</Menu>
 				</div>

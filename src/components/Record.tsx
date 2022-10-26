@@ -4,7 +4,7 @@ import { DeleteIcon } from "@chakra-ui/icons";
 import { ApiServicePost } from "../utils/ApiServices";
 import { useSelector } from "react-redux";
 import { RootState } from "../store/index";
-import { ArrowUpIcon, ArrowDownIcon } from "@chakra-ui/icons";
+import { ArrowUpIcon, ArrowDownIcon, InfoIcon } from "@chakra-ui/icons";
 import { Icon } from "@chakra-ui/react";
 
 function Record({ color, amount, category, date, note, id, type }: any) {
@@ -38,7 +38,18 @@ function Record({ color, amount, category, date, note, id, type }: any) {
 
 				<div className="flex flex-col ml-5">
 					<p className="font-bold capitalize">{category}</p>
-					<p className="text-gray-400">{date.date.replaceAll("/", "-")}</p>
+
+					<span className="flex items-center gap-x-2">
+						<p className="text-gray-400">{date.date.replaceAll("/", "-")}</p>
+						{note && (
+							<div className="text-xs italic">
+								<span className="flex gap-x-1">
+									<p className="font-bold">Note:</p>
+									<p>{note}</p>
+								</span>
+							</div>
+						)}
+					</span>
 				</div>
 			</div>
 			<div className="flex items-center gap-x-2">

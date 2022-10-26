@@ -8,19 +8,34 @@ import InfoContainer from "../containers/InfoContainer";
 import Count from "../components/Count";
 import ExpenseGraph from "../containers/ExpenseGraph";
 import ExpenseGraphMobile from "../containers/ExpenseGraphMobile";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../store/index";
+import { changeSelected } from "../features/tabsSlice";
+import {
+	addTransaction,
+	getCreditCount,
+	getDebitsCount,
+	getPreviousTotalExpense,
+	getPreviousTotalIncome,
+	getTotalExpense,
+	getTotalIncome,
+} from "../features/transactionSlice";
+import dayjs from "dayjs";
+import { useNavigate } from "react-router-dom";
 
 function Dashboard() {
 	const [isAuth, setIsAuth] = useState(false);
+	const navigate = useNavigate();
 	const token = useSelector((state: RootState) => state.auth.token);
 	const debitsCount = useSelector(
 		(state: RootState) => state.transaction.debitsCount
 	);
 	const creditsCount = useSelector(
-		(state: RootState) => state.transaction.debitsCount
+		(state: RootState) => state.transaction.creditsCount
 	);
+	const dispatch = useDispatch();
+
 	const handleLogout = () => {
 		fetch(`{process.env.REACT_APP_LOCAL_URL}/logout`, {
 			method: "POST",
@@ -33,6 +48,38 @@ function Dashboard() {
 			.then((response) => response.json())
 			.then((data) => console.log(data));
 	};
+
+	const getTransactions = () => {
+		fetch(`${process.env.REACT_APP_LOCAL_URL}/transaction`, {
+			method: "GET",
+			headers: {
+				"Content-Type": "application/json",
+				Authorization: `Bearer ${token}`,
+			},
+		})
+			.then((response) => response.json())
+			.then((data) => {
+				console.log(data);
+				if (data.message === "jwt expired") {
+					return navigate("/login");
+				}
+				if (data.transactions) {
+					dispatch(addTransaction(data.transactions));
+					dispatch(getTotalExpense());
+					dispatch(getTotalIncome());
+					let month = dayjs().month();
+					dispatch(getPreviousTotalExpense(month));
+					dispatch(getPreviousTotalIncome(month));
+					dispatch(getDebitsCount());
+					dispatch(getCreditCount());
+				}
+			});
+	};
+
+	useEffect(() => {
+		dispatch(changeSelected(1));
+		getTransactions();
+	}, []);
 
 	return (
 		<div className="block lg:flex">

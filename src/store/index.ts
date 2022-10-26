@@ -2,12 +2,13 @@ import { configureStore } from '@reduxjs/toolkit'
 import authReducer from "../features/auth/authSlice"
 import categoryReducer from "../features/categorySlice"
 import transactionReducer from "../features/transactionSlice"
-
+import tabReducer from "../features/tabsSlice"
 export const store = configureStore({
   reducer: {
     auth: authReducer,
     category:categoryReducer,
-    transaction:transactionReducer
+    transaction:transactionReducer,
+    tab:tabReducer
   },
 })
 

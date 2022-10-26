@@ -7,13 +7,19 @@ import Sidebar from "../containers/Sidebar";
 import Detailsbar from "../containers/Detailsbar";
 import TransactionsContainer from "../containers/TransactionsContainer";
 import BudgetContainer from "../containers/BudgetContainer";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../store/index";
+import { changeSelected } from "../features/tabsSlice";
 
 function Home() {
 	const [isAuth, setIsAuth] = useState(false);
 	const token = useSelector((state: RootState) => state.auth.token);
+	const dispatch = useDispatch();
+
+	useEffect(() => {
+		dispatch(changeSelected(0));
+	}, []);
 
 	return (
 		<div>

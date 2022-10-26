@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Calender from "../components/Calender";
 import { CalendarIcon, WarningIcon, Search2Icon } from "@chakra-ui/icons";
 import { Input, InputGroup, InputLeftElement } from "@chakra-ui/react";
@@ -30,7 +30,7 @@ function DateTransaction({ filterTransaction }: any) {
 			setVisible(false);
 		}
 		if (key === "1") {
-			let currentMonth = dayjs().month();
+			let currentMonth = dayjs().month() + 1;
 			filterTransaction("month", currentMonth);
 			setVisible(false);
 		}
@@ -102,7 +102,9 @@ function DateTransaction({ filterTransaction }: any) {
 							h={5}
 							color="blue.600"
 							className="cursor-pointer"
-							onClick={() => setVisible(true)}
+							onClick={() => {
+								visible ? setVisible(false) : setVisible(true);
+							}}
 						/>
 					</Dropdown>
 					<Icon
