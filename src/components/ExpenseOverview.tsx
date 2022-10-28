@@ -30,7 +30,7 @@ function ExpenseOverview() {
 				</p>
 			</span>
 			<div className="grid gap-5 grid-cols-1 ml-5 mr-5 mb-5 lg:mb-0 lg:ml-0 lg:mr-0 lg:grid-cols-2">
-				{categories.length > 0 && categories.length < 5 ? (
+				{categories && categories.length > 0 && categories.length < 5 ? (
 					<>
 						{categories.map((category: any) => (
 							<span key={category._id}>
