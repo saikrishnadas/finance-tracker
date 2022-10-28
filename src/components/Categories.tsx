@@ -78,7 +78,8 @@ function Categories() {
 				<p>CATEGORIES</p>
 			</div>
 			<div className="flex flex-col gap-y-5 ml-5">
-				{categories.length > 0 &&
+				{categories &&
+					categories.length > 0 &&
 					categories.map((cat: any) => (
 						<span className="flex gap-x-3 items-center" key={cat._id}>
 							<div

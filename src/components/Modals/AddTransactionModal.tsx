@@ -154,7 +154,8 @@ function AddTransactionModal({ isOpen, onClose }: AddTransactionModalProps) {
 								placeholder="Select a Category"
 								onChange={(e: any) => setCategory(e.target.value)}
 							>
-								{categories.length > 0 &&
+								{categories &&
+									categories.length > 0 &&
 									categories.map((category: any) => (
 										<option
 											key={category._id}
