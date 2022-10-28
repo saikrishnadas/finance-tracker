@@ -59,8 +59,8 @@ function Categories() {
 				if (data.message === "jwt expired") {
 					return navigate("/login");
 				}
-				setCategories(data);
-				dispatch(addCategory(data));
+				setCategories(data.categories);
+				dispatch(addCategory(data.categories));
 			});
 	};
 
