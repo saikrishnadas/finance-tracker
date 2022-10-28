@@ -45,16 +45,19 @@ function ExpenseOverview() {
 					</>
 				) : (
 					<>
-						{categories.slice(0, 4).map((category: any) => (
-							<span key={category._id}>
-								{category.categories.type !== "Income" && (
-									<Expenses
-										title={category.categories.title}
-										color={category.categories.color}
-									/>
-								)}
-							</span>
-						))}
+						{categories &&
+							categories
+								.slice(0, 4)
+								.map((category: any) => (
+									<span key={category._id}>
+										{category.categories.type !== "Income" && (
+											<Expenses
+												title={category.categories.title}
+												color={category.categories.color}
+											/>
+										)}
+									</span>
+								))}
 					</>
 				)}
 
