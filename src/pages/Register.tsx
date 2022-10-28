@@ -13,10 +13,13 @@ import {
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { Form } from "antd";
+import { useSelector } from "react-redux";
+import { RootState } from "../store/index";
 
 function Register() {
 	const navigate = useNavigate();
 	const [csrfTokenState, setCsrfTokenState] = useState("");
+	const token = useSelector((state: RootState) => state.auth.token);
 
 	const [error, setError] = useState(false);
 	const [errorMessage, setErrorMessage] = useState("");
@@ -35,7 +38,7 @@ function Register() {
 			confirmPassword: confirmPassword,
 		})
 			.then((data) => {
-				return navigate("/login");
+				navigate("/");
 			})
 			.catch((err) => {
 				setError(true);
@@ -48,6 +51,12 @@ function Register() {
 	// 		setCsrfTokenState(response?.csrfToken)
 	// 	);
 	// }, []);
+
+	useEffect(() => {
+		if (token) {
+			navigate("/");
+		}
+	}, []);
 
 	return (
 		<>

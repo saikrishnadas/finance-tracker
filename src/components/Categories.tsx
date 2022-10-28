@@ -68,6 +68,10 @@ function Categories() {
 		getCategories();
 	}, []);
 
+	useEffect(() => {
+		getCategories();
+	}, []);
+
 	return (
 		<div className="pl-5">
 			<div className="pb-5 font-bold">

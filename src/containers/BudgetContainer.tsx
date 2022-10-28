@@ -43,7 +43,7 @@ function BudgetContainer() {
 	return (
 		<div>
 			<div
-				className="bg-blue-700 text-white font-bold text-2xl h-20 flex items-center justify-center rounded-lg cursor-pointer"
+				className="bg-blue-700 text-white font-bold text-xl ml-5 mr-5 lg:ml-0 lg:mr-0 lg:text-2xl h-10 lg:h-20 flex items-center justify-center rounded-lg cursor-pointer"
 				onClick={openBudgetModal}
 			>
 				<p>Set up Monthly Budget</p>

@@ -23,8 +23,10 @@ function MonthlyOverview() {
 	const incomeIncrease = totalIncome - previousTotalIncome;
 	return (
 		<div className="flex flex-col mt-10">
-			<p className="font-semibold mb-5 text-lg">Monthly Overview</p>
-			<div className="flex gap-x-10">
+			<p className="ml-5 lg:ml-0 font-semibold mb-5 text-lg">
+				Monthly Overview
+			</p>
+			<div className="flex justify-center gap-x-5 lg:gap-x-10">
 				<OverviewChartExpense total={totalExpense} increase={Expenseincrease} />
 				<OverviewChartIncome total={totalIncome} increase={incomeIncrease} />
 			</div>

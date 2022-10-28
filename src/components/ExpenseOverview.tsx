@@ -20,7 +20,7 @@ function ExpenseOverview() {
 	};
 	return (
 		<div className="flex flex-col mt-10">
-			<span className="flex gap-x-2 justify-between">
+			<span className="ml-5 mr-5 lg:mr-0 lg:ml-0 flex gap-x-2 justify-between">
 				<p className="font-semibold mb-5 text-lg">Expenses by category</p>
 				<p
 					className="text-sm cursor-pointer text-blue-700"
@@ -29,7 +29,7 @@ function ExpenseOverview() {
 					See more
 				</p>
 			</span>
-			<div className="grid gap-5 grid-cols-2">
+			<div className="grid gap-5 grid-cols-1 ml-5 mr-5 mb-5 lg:mb-0 lg:ml-0 lg:mr-0 lg:grid-cols-2">
 				{categories.length > 0 && categories.length < 5 ? (
 					<>
 						{categories.map((category: any) => (
