@@ -16,6 +16,7 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import type { RootState } from "../store";
 import { Form } from "antd";
+import Cookies from "js-cookie";
 
 export interface InputLoginProps {
 	email: string;
@@ -27,7 +28,7 @@ function Login() {
 	const navigate = useNavigate();
 	const [csrfTokenState, setCsrfTokenState] = useState("");
 	const dispatch = useDispatch();
-	// const token = useSelector((state: RootState) => state.auth.token);
+	const token = useSelector((state: RootState) => state.auth.token);
 
 	const [error, setError] = useState(false);
 	const [errorMessage, setErrorMessage] = useState("");
@@ -38,17 +39,18 @@ function Login() {
 	const isPasswordError = password === "ss";
 
 	const handleAutoFillUser = () => {
-		setEmail("test@test.com");
-		setPassword("Qwerty");
+		setEmail("test10@test.com");
+		setPassword("qwertyuiop");
 	};
 
 	const onFinish = () => {
 		ApiService("/login", "POST", { email: email, password: password })
 			.then((data: any) => {
 				let { token } = data;
-				localStorage.setItem("token", token);
-				// dispatch(authenticate(data));
-				return navigate("/dashboard");
+				// localStorage.setItem("token", token);
+				dispatch(authenticate(token));
+				Cookies.set("token", JSON.stringify(token));
+				navigate("/");
 			})
 			.catch((err) => {
 				setError(true);
@@ -67,6 +69,12 @@ function Login() {
 	// 		return navigate("/dashboard");
 	// 	}
 	// }, [isLoggedIn]);
+
+	useEffect(() => {
+		if (token) {
+			navigate("/");
+		}
+	}, []);
 
 	return (
 		<>

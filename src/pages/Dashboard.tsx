@@ -81,6 +81,12 @@ function Dashboard() {
 		getTransactions();
 	}, []);
 
+	useEffect(() => {
+		if (!token) {
+			navigate("/login");
+		}
+	}, []);
+
 	return (
 		<div className="block lg:flex">
 			<Sidebar />

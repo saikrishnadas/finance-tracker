@@ -1,4 +1,4 @@
-import { Routes, Route, Link } from "react-router-dom";
+import { Routes, Route, Link, useNavigate } from "react-router-dom";
 import Profile from "../components/Profile";
 import Tabbar from "../components/Tabbar";
 import { Avatar, AvatarBadge, AvatarGroup } from "@chakra-ui/react";
@@ -16,9 +16,16 @@ function Home() {
 	const [isAuth, setIsAuth] = useState(false);
 	const token = useSelector((state: RootState) => state.auth.token);
 	const dispatch = useDispatch();
+	const navigate = useNavigate();
 
 	useEffect(() => {
 		dispatch(changeSelected(0));
+	}, []);
+
+	useEffect(() => {
+		if (!token) {
+			navigate("/login");
+		}
 	}, []);
 
 	return (
@@ -29,7 +36,7 @@ function Home() {
 				<div className="w-[22em] lg:w-[40em] pl-10 pt-10">
 					<TransactionsContainer />
 				</div>
-				<div className="hidden lg:block lg:w-[28em] lg:max-w-[28em] lg:pl-10 lg:pt-10">
+				<div className="lg:block lg:w-[28em] lg:max-w-[28em] lg:pl-10 lg:pt-10">
 					<BudgetContainer />
 				</div>
 			</div>
