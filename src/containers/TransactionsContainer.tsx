@@ -80,7 +80,7 @@ function TransactionsContainer() {
 			<Total />
 			<div className="w-[100%] h-[0.5px] bg-gray-300 mt-5" />
 			<div className="pr-5 scrollbar-thumb-blue-600 scrollbar-track-gray-100 scrollbar-thin overflow-auto h-[32em] max-h-[32em]">
-				{transaction.map((transaction: any) => (
+				{transaction?.map((transaction: any) => (
 					<span key={transaction._id}>
 						<Record
 							// color="red"
