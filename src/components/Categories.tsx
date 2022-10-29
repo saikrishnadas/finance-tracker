@@ -15,7 +15,7 @@ import { categories } from "../utils/day";
 function Categories() {
 	const [isOpen, setIsOpen] = useState(false);
 	const [isOpenEdit, setIsOpenEdit] = useState(false);
-	const [categories, setCategories] = useState([]);
+	const [categories, setCategories] = useState<any>([]);
 	const navigate = useNavigate();
 	const token = useSelector((state: RootState) => state.auth.token);
 	const dispatch = useDispatch();
@@ -60,14 +60,8 @@ function Categories() {
 				if (data.message === "jwt expired") {
 					return navigate("/login");
 				}
-				let cat;
-				if (Array.isArray(data.categories) && data.categories.length > 0) {
-					cat = data.categories;
-				} else {
-					cat = [];
-				}
-				setCategories(cat);
-				dispatch(addCategory(cat));
+				setCategories(data);
+				// dispatch(addCategory(data));
 			});
 	};
 
@@ -89,7 +83,7 @@ function Categories() {
 				<p>CATEGORIES</p>
 			</div>
 			<div className="flex flex-col gap-y-5 ml-5">
-				{categories?.map((cat: any) => (
+				{categories.categories?.map((cat: any) => (
 					<span className="flex gap-x-3 items-center" key={cat._id}>
 						<div
 							className={`w-5 h-5 ${
