@@ -90,7 +90,7 @@ function Dashboard() {
 	return (
 		<div className="block lg:flex">
 			<Sidebar />
-			<Detailsbar />
+			{/* <Detailsbar />
 			<div>
 				<div className="lg:mt-10 lg:ml-10">
 					<InfoContainer />
@@ -107,7 +107,7 @@ function Dashboard() {
 						<ExpenseGraphMobile />
 					</div>
 				</div>
-			</div>
+			</div> */}
 		</div>
 	);
 }
