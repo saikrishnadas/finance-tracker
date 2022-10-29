@@ -34,10 +34,10 @@ function Home() {
 				<Sidebar />
 				<Detailsbar token={token} />
 				<div className="w-[22em] lg:w-[40em] pl-10 pt-10">
-					<TransactionsContainer />
+					{/* <TransactionsContainer /> */}
 				</div>
 				<div className="lg:block lg:w-[28em] lg:max-w-[28em] lg:pl-10 lg:pt-10">
-					<BudgetContainer />
+					{/* <BudgetContainer /> */}
 				</div>
 			</div>
 		</div>
