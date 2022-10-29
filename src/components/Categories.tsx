@@ -82,7 +82,7 @@ function Categories() {
 				<p>CATEGORIES</p>
 			</div>
 			<div className="flex flex-col gap-y-5 ml-5">
-				{categories.map((cat: any) => (
+				{categories?.map((cat: any) => (
 					<span className="flex gap-x-3 items-center" key={cat._id}>
 						<div
 							className={`w-5 h-5 ${
