@@ -67,8 +67,8 @@ function BudgetContainer() {
 					</span>
 				)}
 			</div>
-			<MonthlyOverview />
-			<ExpenseOverview />
+			{/* <MonthlyOverview />
+			<ExpenseOverview /> */}
 			<BudgetSetupModal isOpen={isOpen} onClose={onClose} />
 		</div>
 	);

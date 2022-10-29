@@ -10,6 +10,7 @@ import { RootState } from "../store/index";
 import { ApiServicePost } from "../utils/ApiServices";
 import { useNavigate } from "react-router-dom";
 import { addCategory } from "../features/categorySlice";
+import { categories } from "../utils/day";
 
 function Categories() {
 	const [isOpen, setIsOpen] = useState(false);
@@ -55,12 +56,18 @@ function Categories() {
 		})
 			.then((response) => response.json())
 			.then((data) => {
-				// console.log("data", data);
+				console.log("data", data);
 				if (data.message === "jwt expired") {
 					return navigate("/login");
 				}
-				setCategories(data.categories);
-				dispatch(addCategory(data.categories));
+				let cat;
+				if (Array.isArray(data.categories) && data.categories.length > 0) {
+					cat = data.categories;
+				} else {
+					cat = [];
+				}
+				setCategories(cat);
+				dispatch(addCategory(cat));
 			});
 	};
 
