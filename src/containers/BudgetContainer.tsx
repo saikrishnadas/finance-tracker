@@ -4,6 +4,7 @@ import MonthlyOverview from "../components/MonthlyOverview";
 import BudgetSetupModal from "../components/Modals/BudgetSetupModal";
 import { RootState } from "../store/index";
 import { useSelector } from "react-redux";
+import { ApiServicePost } from "../utils/ApiServices";
 
 function BudgetContainer() {
 	const [isOpen, setIsOpen] = useState(false);
@@ -33,6 +34,20 @@ function BudgetContainer() {
 			.then((data) => {
 				setBudget(data?.budget);
 			});
+	};
+
+	const addBudget = (count: any) => {
+		ApiServicePost(
+			"/budget",
+			"POST",
+			{ budget: count && parseInt(count) },
+			token
+		)
+			.then((data: boolean) => {
+				getBudget();
+			})
+			.catch((err) => {});
+		onClose();
 	};
 
 	useEffect(() => {
@@ -67,7 +82,11 @@ function BudgetContainer() {
 			</div>
 			<MonthlyOverview />
 			<ExpenseOverview />
-			<BudgetSetupModal isOpen={isOpen} onClose={onClose} />
+			<BudgetSetupModal
+				isOpen={isOpen}
+				onClose={onClose}
+				addBudget={addBudget}
+			/>
 		</div>
 	);
 }

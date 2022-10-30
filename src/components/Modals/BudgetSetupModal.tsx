@@ -22,20 +22,11 @@ interface EditCategoryModalProps {
 	onClose: any;
 }
 
-function BudgetSetupModal({ isOpen, onClose }: EditCategoryModalProps) {
+function BudgetSetupModal({ isOpen, onClose, addBudget }: any) {
 	const [count, setCount] = useState(null);
-	const token = useSelector((state: RootState) => state.auth.token);
 
 	const handleSubmit = () => {
-		ApiServicePost(
-			"/budget",
-			"POST",
-			{ budget: count && parseInt(count) },
-			token
-		)
-			.then((data: boolean) => {})
-			.catch((err) => {});
-		onClose();
+		addBudget(count);
 	};
 
 	return (
