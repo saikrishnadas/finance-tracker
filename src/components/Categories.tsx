@@ -1,7 +1,12 @@
 // @ts-ignore
 import { SmallAddIcon, DeleteIcon } from "@chakra-ui/icons";
 
-function Categories({ categories, deleteCategory, openAddCategoryModal }: any) {
+function Categories({
+	categories,
+	deleteCategory,
+	openAddCategoryModal,
+	sample,
+}: any) {
 	return (
 		<div className="pl-5">
 			<div className="pb-5 font-bold">
@@ -34,6 +39,7 @@ function Categories({ categories, deleteCategory, openAddCategoryModal }: any) {
 				>
 					<SmallAddIcon color="blue" />
 					<div>Add Another</div>
+					<div>{sample}</div>
 				</div>
 			</div>
 		</div>
