@@ -7,11 +7,15 @@ import dayjs from "dayjs";
 import { Icon } from "@chakra-ui/react";
 import { MdAddCircle } from "react-icons/md";
 import { SlCalender } from "react-icons/sl";
+import { ApiServicePost } from "../utils/ApiServices";
+import { useSelector } from "react-redux";
+import { RootState } from "../store/index";
 
-function DateTransaction({ filterTransaction }: any) {
-	const [isOpen, setIsOpen] = useState(false);
+function DateTransaction({ filterTransaction,openAddTransactionModal }: any) {
+
 	const [show, setShow] = useState(false);
 	const [visible, setVisible] = useState(false);
+	const token = useSelector((state: RootState) => state.auth.token);
 
 	const handleDate = (date: any, dateString: any) => {
 		let selectedDate = dayjs(date).format("YYYY-MM-DD");
@@ -74,13 +78,6 @@ function DateTransaction({ filterTransaction }: any) {
 		/>
 	);
 
-	const openAddTransactionModal = () => {
-		setIsOpen(true);
-	};
-
-	const onClose = () => {
-		setIsOpen(false);
-	};
 
 	return (
 		<div className="flex flex-col gap-y-5">
@@ -123,7 +120,7 @@ function DateTransaction({ filterTransaction }: any) {
 					<Input type="text" placeholder="Search" />
 				</InputGroup>
 			</div>
-			<AddTransactionModal isOpen={isOpen} onClose={onClose} />
+	
 		</div>
 	);
 }

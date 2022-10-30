@@ -30,8 +30,8 @@ function ExpenseCategoryModal({ isOpen, onClose }: ExpenseCategoryModalProps) {
 					<ModalCloseButton />
 					<ModalBody pb={6}>
 						<div className="grid gap-5 grid-cols-2">
-							{Array.isArray(categories) &&
-								categories.map((category: any) => (
+							{Array.isArray(categories.categories) &&
+								categories.categories?.map((category: any) => (
 									<span key={category._id}>
 										{category.categories.type !== "Income" && (
 											<Expenses

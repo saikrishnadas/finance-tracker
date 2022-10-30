@@ -16,8 +16,10 @@ import {
 } from "../features/transactionSlice";
 import dayjs from "dayjs";
 import { ApiServicePost } from "../utils/ApiServices";
+import AddTransactionModal from "../components/Modals/AddTransactionModal";
 
 function TransactionsContainer() {
+	const [isOpen, setIsOpen] = useState(false);
 	const [transaction, setTransaction] = useState([]);
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
@@ -25,6 +27,15 @@ function TransactionsContainer() {
 	const transactions = useSelector(
 		(state: RootState) => state.transaction.transactions
 	);
+
+	const openAddTransactionModal = () => {
+		setIsOpen(true);
+	};
+
+	const onClose = () => {
+		setIsOpen(false);
+	};
+
 	const getTransactions = () => {
 		fetch(`${process.env.REACT_APP_LOCAL_URL}/transaction`, {
 			method: "GET",
@@ -70,8 +81,44 @@ function TransactionsContainer() {
 
 	const deleteTransaction = (id: any) => {
 		ApiServicePost("/transaction", "DELETE", { transactionId: id }, token)
-			.then((data: boolean) => {})
+			.then((data: boolean) => {
+				getTransactions();
+			})
 			.catch((err) => {});
+	};
+
+	const addTransactions = (
+		amount: any,
+		category: any,
+		day: any,
+		month: any,
+		year: any,
+		date: any,
+		type: any,
+		note: any
+	) => {
+		ApiServicePost(
+			"/transaction",
+			"POST",
+			{
+				amount: amount,
+				category: category,
+				date: {
+					day: day,
+					month: month,
+					year: year,
+					date: date,
+				},
+				type: type,
+				note: note,
+			},
+			token
+		)
+			.then((data: boolean) => {
+				getTransactions();
+			})
+			.catch((err) => {});
+		onClose();
 	};
 
 	useEffect(() => {
@@ -80,7 +127,10 @@ function TransactionsContainer() {
 
 	return (
 		<>
-			<DateTransaction filterTransaction={filterTransaction} />
+			<DateTransaction
+				filterTransaction={filterTransaction}
+				openAddTransactionModal={openAddTransactionModal}
+			/>
 			<Total />
 			<div className="w-[100%] h-[0.5px] bg-gray-300 mt-5" />
 			<div className="pr-5 scrollbar-thumb-blue-600 scrollbar-track-gray-100 scrollbar-thin overflow-auto h-[32em] max-h-[32em]">
@@ -98,6 +148,11 @@ function TransactionsContainer() {
 					</span>
 				))}
 			</div>
+			<AddTransactionModal
+				isOpen={isOpen}
+				onClose={onClose}
+				addTransaction={addTransactions}
+			/>
 		</>
 	);
 }

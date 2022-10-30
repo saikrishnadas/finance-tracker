@@ -22,24 +22,16 @@ import { Radio, Form } from "antd";
 interface AddCategoryModalProps {
 	isOpen: boolean;
 	onClose: any;
+	addCategories: any;
 }
 
-function AddCategoryModal({ isOpen, onClose }: AddCategoryModalProps) {
+function AddCategoryModal({ isOpen, onClose, addCategories }: any) {
 	const [name, setName] = useState("");
 	const [color, setColor] = useState("");
 	const [type, setType] = useState("Expense");
-	const token = useSelector((state: RootState) => state.auth.token);
 
 	const handleSubmit = () => {
-		ApiServicePost(
-			"/categories",
-			"POST",
-			{ title: name, color: color, type: type },
-			token
-		)
-			.then((data: boolean) => {})
-			.catch((err) => {});
-		onClose();
+		addCategories(name, color, type);
 	};
 
 	return (

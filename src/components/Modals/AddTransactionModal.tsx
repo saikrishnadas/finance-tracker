@@ -22,7 +22,7 @@ interface AddTransactionModalProps {
 	onClose: any;
 }
 
-function AddTransactionModal({ isOpen, onClose }: AddTransactionModalProps) {
+function AddTransactionModal({ isOpen, onClose, addTransaction }: any) {
 	const [amount, setAmount] = useState(0);
 	const [category, setCategory] = useState("");
 	const [type, setType] = useState("Expense");
@@ -48,26 +48,7 @@ function AddTransactionModal({ isOpen, onClose }: AddTransactionModalProps) {
 	};
 
 	const handleSubmit = () => {
-		ApiServicePost(
-			"/transaction",
-			"POST",
-			{
-				amount: amount,
-				category: category,
-				date: {
-					day: day,
-					month: month,
-					year: year,
-					date: date,
-				},
-				type: type,
-				note: note,
-			},
-			token
-		)
-			.then((data: boolean) => {})
-			.catch((err) => {});
-		onClose();
+		addTransaction(amount, category, day, month, year, date, type, note);
 	};
 
 	return (
@@ -113,8 +94,8 @@ function AddTransactionModal({ isOpen, onClose }: AddTransactionModalProps) {
 								placeholder="Select a Category"
 								onChange={(e: any) => setCategory(e.target.value)}
 							>
-								{Array.isArray(categories) &&
-									categories.map((category: any) => (
+								{Array.isArray(categories.categories) &&
+									categories.categories?.map((category: any) => (
 										<option
 											key={category._id}
 											value={category.categories.title}
