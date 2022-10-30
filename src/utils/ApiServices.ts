@@ -12,7 +12,7 @@ export const ApiService = async (endpointUrl:string,method:string,data?:any,toke
     })
     let parsedResponse = await fetchResponse.json();
     if(fetchResponse.ok){
-        console.log(parsedResponse)
+        
         return parsedResponse
     }else{
         throw parsedResponse.error
@@ -44,7 +44,6 @@ export const ApiServicePost = async (endpointUrl:string,method:string,data?:any,
     })
     let parsedResponse = await fetchResponse.json();
     if(fetchResponse.ok){
-        console.log(parsedResponse)
         return parsedResponse
     }else{
         throw parsedResponse.error

@@ -14,8 +14,8 @@ import {
 	getDebitsCount,
 	getCreditCount,
 } from "../features/transactionSlice";
-import { CalendarIcon, WarningIcon, Search2Icon } from "@chakra-ui/icons";
 import dayjs from "dayjs";
+import { ApiServicePost } from "../utils/ApiServices";
 
 function TransactionsContainer() {
 	const [transaction, setTransaction] = useState([]);
@@ -35,7 +35,6 @@ function TransactionsContainer() {
 		})
 			.then((response) => response.json())
 			.then((data) => {
-				console.log(data);
 				if (data.message === "jwt expired") {
 					return navigate("/login");
 				}
@@ -54,20 +53,25 @@ function TransactionsContainer() {
 	};
 
 	const filterTransaction = (type: any, value: any) => {
-		console.log(type, value);
 		if (type === "day") {
 			let filteredTransaction = transactions.filter(
 				(transaction: any) => transaction.transactions.date.day === value
 			);
-			console.log(filteredTransaction);
+
 			setTransaction(filteredTransaction);
 		} else if (type === "month") {
 			let filteredTransaction = transactions.filter(
 				(transaction: any) => transaction.transactions.date.month === value
 			);
-			console.log("filteredTransaction => ", filteredTransaction);
+
 			setTransaction(filteredTransaction);
 		}
+	};
+
+	const deleteTransaction = (id: any) => {
+		ApiServicePost("/transaction", "DELETE", { transactionId: id }, token)
+			.then((data: boolean) => {})
+			.catch((err) => {});
 	};
 
 	useEffect(() => {
@@ -83,13 +87,13 @@ function TransactionsContainer() {
 				{transaction?.map((transaction: any) => (
 					<span key={transaction._id}>
 						<Record
-							// color="red"
 							type={transaction.transactions.type}
 							amount={transaction.transactions.amount}
 							category={transaction.transactions.category}
 							date={transaction.transactions.date}
 							note={transaction.transactions.note}
 							id={transaction._id}
+							deleteTransaction={deleteTransaction}
 						/>
 					</span>
 				))}

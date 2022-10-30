@@ -1,4 +1,3 @@
-import React from "react";
 import InfoCard from "../components/InfoCard";
 import walletIcon from "../images/wallet.svg";
 import incomeIcon from "../images/income.svg";

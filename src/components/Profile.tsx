@@ -1,14 +1,5 @@
-import { Avatar, AvatarBadge, AvatarGroup } from "@chakra-ui/react";
-import { useState, useEffect } from "react";
+import { Avatar } from "@chakra-ui/react";
 function Profile() {
-	const [isOpen, setIsOpen] = useState(false);
-	const openUpdateProfileModal = () => {
-		setIsOpen(true);
-	};
-
-	const onClose = () => {
-		setIsOpen(false);
-	};
 	return (
 		<>
 			<span>

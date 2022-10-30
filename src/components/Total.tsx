@@ -1,7 +1,5 @@
-import React from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { RootState } from "../store/index";
-import { useEffect, useState } from "react";
 
 function Total() {
 	const totalExpense = useSelector(

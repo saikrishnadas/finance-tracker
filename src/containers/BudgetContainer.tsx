@@ -24,7 +24,6 @@ function BudgetContainer() {
 	const getBudget = () => {
 		fetch(`${process.env.REACT_APP_LOCAL_URL}/budget`, {
 			method: "GET",
-			// mode: "no-cors",
 			headers: {
 				"Content-Type": "application/json",
 				Authorization: `Bearer ${token}`,
@@ -32,7 +31,6 @@ function BudgetContainer() {
 		})
 			.then((response) => response.json())
 			.then((data) => {
-				console.log(data);
 				setBudget(data?.budget);
 			});
 	};
@@ -67,8 +65,8 @@ function BudgetContainer() {
 					</span>
 				)}
 			</div>
-			{/* <MonthlyOverview />
-			<ExpenseOverview /> */}
+			<MonthlyOverview />
+			<ExpenseOverview />
 			<BudgetSetupModal isOpen={isOpen} onClose={onClose} />
 		</div>
 	);

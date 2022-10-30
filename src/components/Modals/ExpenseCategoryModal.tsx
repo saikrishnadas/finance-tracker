@@ -1,6 +1,3 @@
-import React from "react";
-import { useState } from "react";
-import ExpenseOverview from "../ExpenseOverview";
 import Expenses from "../Expenses";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store/index";
@@ -12,11 +9,7 @@ import {
 	ModalFooter,
 	ModalBody,
 	ModalCloseButton,
-	FormControl,
-	FormLabel,
-	Input,
 	Button,
-	Select,
 } from "@chakra-ui/react";
 
 interface ExpenseCategoryModalProps {
