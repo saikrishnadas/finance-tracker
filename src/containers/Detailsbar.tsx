@@ -12,6 +12,7 @@ import AddCategoryModal from "../components/Modals/AddCategoryModal";
 function Detailsbar() {
 	const [isOpen, setIsOpen] = useState(false);
 	const [categories, setCategories] = useState([]);
+	const [sample, setSample] = useState("");
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 	const token = useSelector((state: RootState) => state.auth.token);
@@ -49,6 +50,10 @@ function Detailsbar() {
 			});
 	};
 
+	const sampleFun = () => {
+		setSample("Hello");
+	};
+
 	// useEffect(() => {
 	// 	getCategories();
 	// }, []);
@@ -60,6 +65,7 @@ function Detailsbar() {
 	return (
 		<div className="bg-gray-200 w-[18vw] pt-10 lg:flex flex-col justify-between pb-5 gap-y-10 hidden">
 			<Categories
+				sample={sample}
 				categories={categories}
 				deleteCategory={deleteCategory}
 				openAddCategoryModal={openAddCategoryModal}
@@ -78,6 +84,7 @@ function Detailsbar() {
 					<option value="india">India</option>
 				</Select>
 				<button onClick={getCategories}>Click to get category</button>
+				<button onClick={sampleFun}>Click to sample</button>
 			</div>
 			<AddCategoryModal isOpen={isOpen} onClose={onClose} />
 		</div>
