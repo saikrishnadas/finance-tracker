@@ -50,9 +50,29 @@ function Detailsbar() {
 			});
 	};
 
-	const sampleFun = () => {
-		setSample("Hello");
+	const getTest = () => {
+		fetch(`${process.env.REACT_APP_LOCAL_URL}/test`, {
+			method: "GET",
+			headers: {
+				"Content-Type": "application/json",
+				Authorization: `Bearer ${token}`,
+			},
+		})
+			.then((response) => response.json())
+			.then((data) => {
+				if (data.message === "jwt expired") {
+					return navigate("/login");
+				}
+				console.log("DATA", data);
+				// setCategories(data);
+				setSample(data);
+				// dispatch(addCategory(data.categories));
+			});
 	};
+
+	// const sampleFun = () => {
+	// 	setSample("Hello");
+	// };
 
 	// useEffect(() => {
 	// 	getCategories();
@@ -84,7 +104,7 @@ function Detailsbar() {
 					<option value="india">India</option>
 				</Select>
 				<button onClick={getCategories}>Click to get category</button>
-				<button onClick={sampleFun}>Click to sample</button>
+				<button onClick={getTest}>Click to sample</button>
 			</div>
 			<AddCategoryModal isOpen={isOpen} onClose={onClose} />
 		</div>

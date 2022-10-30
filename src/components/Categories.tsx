@@ -39,7 +39,7 @@ function Categories({
 				>
 					<SmallAddIcon color="blue" />
 					<div>Add Another</div>
-					<div>{sample}</div>
+					<div>{sample.data}</div>
 				</div>
 			</div>
 		</div>
