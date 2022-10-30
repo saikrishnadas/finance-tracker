@@ -74,9 +74,9 @@ function Detailsbar() {
 	// 	setSample("Hello");
 	// };
 
-	// useEffect(() => {
-	// 	getCategories();
-	// }, []);
+	useEffect(() => {
+		getCategories();
+	}, []);
 
 	useEffect(() => {
 		console.log("CATEGORIES -", categories);
