@@ -133,14 +133,14 @@ function TransactionsContainer() {
 	}, []);
 
 	return (
-		<>
+		<div>
 			<DateTransaction
 				filterTransaction={filterTransaction}
 				openAddTransactionModal={openAddTransactionModal}
 			/>
 			<Total />
 			<div className="w-[100%] h-[0.5px] bg-gray-300 mt-5" />
-			<div className="pr-5 scrollbar-thumb-blue-600 scrollbar-track-gray-100 scrollbar-thin overflow-auto h-[32em] max-h-[32em]">
+			<div className="pr-5 scrollbar-thumb-blue-600 scrollbar-track-gray-100 scrollbar-thin overflow-auto mb-8 lg:mb-0 lg:h-[32em] max-h-[32em]">
 				{transaction?.map((transaction: any) => (
 					<span key={transaction._id}>
 						<Record
@@ -160,7 +160,7 @@ function TransactionsContainer() {
 				onClose={onClose}
 				addTransaction={addTransactions}
 			/>
-		</>
+		</div>
 	);
 }
 

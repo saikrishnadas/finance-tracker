@@ -41,12 +41,12 @@ function Sidebar() {
 				<Tabbar handlePage={handlePage} />
 			</div>
 			<div className="lg:hidden w-[100vw] flex justify-center">
-				<TopTabbar />
+				<TopTabbar handlePage={handlePage} />
 			</div>
 			<div className="pl-2">
 				<Profile />
 			</div>
-			<div className="pl-2">
+			<div className="hidden lg:block lg:pl-2">
 				<button onClick={handleLogout}>Logout</button>
 			</div>
 		</div>

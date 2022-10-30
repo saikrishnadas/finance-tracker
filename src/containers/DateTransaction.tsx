@@ -11,8 +11,7 @@ import { ApiServicePost } from "../utils/ApiServices";
 import { useSelector } from "react-redux";
 import { RootState } from "../store/index";
 
-function DateTransaction({ filterTransaction,openAddTransactionModal }: any) {
-
+function DateTransaction({ filterTransaction, openAddTransactionModal }: any) {
 	const [show, setShow] = useState(false);
 	const [visible, setVisible] = useState(false);
 	const token = useSelector((state: RootState) => state.auth.token);
@@ -78,11 +77,10 @@ function DateTransaction({ filterTransaction,openAddTransactionModal }: any) {
 		/>
 	);
 
-
 	return (
 		<div className="flex flex-col gap-y-5">
 			<div className="flex justify-between items-center">
-				<p className="font-bold text-2xl">Daily Transactions</p>
+				<p className="font-bold text-xl lg:text-2xl">Daily Transactions</p>
 				<div className="flex gap-x-4">
 					<Dropdown
 						overlay={menu}
@@ -111,7 +109,7 @@ function DateTransaction({ filterTransaction,openAddTransactionModal }: any) {
 					/>
 				</div>
 			</div>
-			<div>
+			<div className="hidden lg:block">
 				<InputGroup>
 					<InputLeftElement
 						pointerEvents="none"
@@ -120,7 +118,6 @@ function DateTransaction({ filterTransaction,openAddTransactionModal }: any) {
 					<Input type="text" placeholder="Search" />
 				</InputGroup>
 			</div>
-	
 		</div>
 	);
 }
