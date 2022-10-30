@@ -11,7 +11,20 @@ import AddCategoryModal from "../components/Modals/AddCategoryModal";
 
 function Detailsbar() {
 	const [isOpen, setIsOpen] = useState(false);
-	const [categories, setCategories] = useState([]);
+	const [categories, setCategories] = useState([
+		{
+			categories: {
+				title: "Test",
+				color: "green",
+				type: "Expense",
+			},
+			_id: "635e36687a02cb07494b564c",
+			userId: "635e364b7a02cb07494b5646",
+			createdAt: "2022-10-30T08:31:36.914Z",
+			updatedAt: "2022-10-30T08:31:36.914Z",
+			__v: 0,
+		},
+	]);
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 	const token = useSelector((state: RootState) => state.auth.token);
@@ -43,6 +56,7 @@ function Detailsbar() {
 				if (data.message === "jwt expired") {
 					return navigate("/login");
 				}
+
 				setCategories(data.categories);
 				dispatch(addCategory(data.categories));
 			});
