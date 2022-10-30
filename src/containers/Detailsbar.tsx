@@ -54,7 +54,7 @@ function Detailsbar() {
 	}, []);
 
 	useEffect(() => {
-		console.log("CATEGORIES", categories);
+		console.log("CATEGORIES -", categories);
 	}, []);
 
 	return (
