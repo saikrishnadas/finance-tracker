@@ -40,7 +40,10 @@ function Record({
 			</div>
 			<div className="flex items-center gap-x-2">
 				<div>
-					<p>${amount}</p>
+					<p>
+						{"\u20B9"}
+						{amount}
+					</p>
 				</div>
 				<div className="cursor-pointer" onClick={() => deleteTransaction(id)}>
 					<DeleteIcon color="red.500" />

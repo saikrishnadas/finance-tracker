@@ -9,11 +9,20 @@ function OverviewChartExpense({ total, increase }: any) {
 				<img src={chart} alt="expense-mock-chart" />
 			</div>
 			<div className="flex flex-col items-center">
-				<p className="font-bold text-xl">${total}</p>
+				<p className="font-bold text-xl">
+					{"\u20B9"}
+					{total}
+				</p>
 				{increase < 0 ? (
-					<p className="font-semibold text-orange-500 text-sm">- ${increase}</p>
+					<p className="font-semibold text-orange-500 text-sm">
+						- {"\u20B9"}
+						{increase}
+					</p>
 				) : (
-					<p className="font-semibold text-orange-500 text-sm">+ ${increase}</p>
+					<p className="font-semibold text-orange-500 text-sm">
+						+ {"\u20B9"}
+						{increase}
+					</p>
 				)}
 			</div>
 		</div>

@@ -69,12 +69,18 @@ function BudgetContainer() {
 						{totalExpense > budget ? (
 							<p className="flex gap-x-2 text-red-600">
 								Net Spent exceeded monthly Budget
-								<p className="font-bold">${budget}</p>
+								<p className="font-bold">
+									{"\u20B9"}
+									{budget}
+								</p>
 							</p>
 						) : (
 							<p className="flex gap-x-2">
 								Current Monthly Budget:
-								<p className="font-bold">${budget}</p>
+								<p className="font-bold">
+									{"\u20B9"}
+									{budget}
+								</p>
 							</p>
 						)}
 					</span>

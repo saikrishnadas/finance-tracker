@@ -48,7 +48,7 @@ function AddTransactionModal({ isOpen, onClose, addTransaction }: any) {
 	};
 
 	const handleSubmit = () => {
-		addTransaction(amount, category, day, month, year, date, type, note);
+		addTransaction(amount, category, day, month, year, date, type);
 	};
 
 	return (
