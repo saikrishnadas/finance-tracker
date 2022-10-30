@@ -17,9 +17,6 @@ function ExpenseOverview() {
 	const onClose = () => {
 		setIsOpen(false);
 	};
-	useEffect(() => {
-		console.log(categories);
-	}, [categories]);
 	return (
 		<div className="flex flex-col mt-10">
 			<span className="ml-5 mr-5 lg:mr-0 lg:ml-0 flex gap-x-2 justify-between">

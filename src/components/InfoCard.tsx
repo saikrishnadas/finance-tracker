@@ -49,7 +49,10 @@ function InfoCard({ title, count, icon }: InfoCardProps) {
 				</div>
 			</div>
 			<div className="ml-5 font-bold text-xl">
-				<p>${count}</p>
+				<p>
+					{"\u20B9"}
+					{count}
+				</p>
 			</div>
 			<div className="ml-5 w-20 text-sm">
 				<p>{title}</p>

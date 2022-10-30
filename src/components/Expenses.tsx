@@ -43,7 +43,10 @@ function Expenses({ title, color }: ExpensesProps) {
 		>
 			<div className="flex flex-col ml-5">
 				<p className="font-bold text-gray-400 text-sm">{title}</p>
-				<p className="font-bold ">${calculate()[0]}</p>
+				<p className="font-bold ">
+					{"\u20B9"}
+					{calculate()[0]}
+				</p>
 			</div>
 			<div>
 				<p className="text-orange-600 font-semibold">{calculate()[1]}%</p>

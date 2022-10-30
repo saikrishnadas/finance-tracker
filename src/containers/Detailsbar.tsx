@@ -45,7 +45,6 @@ function Detailsbar() {
 				if (data.message === "jwt expired") {
 					return navigate("/login");
 				}
-				console.log("DATA", data);
 				setCategories(data);
 				dispatch(addCategory(data));
 			});

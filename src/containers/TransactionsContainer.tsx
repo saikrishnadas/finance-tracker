@@ -21,6 +21,7 @@ import AddTransactionModal from "../components/Modals/AddTransactionModal";
 function TransactionsContainer() {
 	const [isOpen, setIsOpen] = useState(false);
 	const [transaction, setTransaction] = useState([]);
+	const [test, setTest] = useState([]);
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
 	const token = useSelector((state: RootState) => state.auth.token);
@@ -50,11 +51,17 @@ function TransactionsContainer() {
 					return navigate("/login");
 				}
 				if (data.transactions) {
-					setTransaction(data.transactions);
+					let filteredTransaction = data.transactions.filter(
+						(transaction: any) => transaction.transactions.date.month === 10
+					);
+					// console.log("filteredTransaction", filteredTransaction);
+					setTransaction(filteredTransaction);
+					// setTransaction(data.transactions);
 					dispatch(addTransaction(data.transactions));
-					dispatch(getTotalExpense());
-					dispatch(getTotalIncome());
 					let month = dayjs().month();
+					// console.log("Current month", month);
+					dispatch(getTotalExpense(month + 1));
+					dispatch(getTotalIncome(month + 1));
 					dispatch(getPreviousTotalExpense(month));
 					dispatch(getPreviousTotalIncome(month));
 					dispatch(getDebitsCount());
