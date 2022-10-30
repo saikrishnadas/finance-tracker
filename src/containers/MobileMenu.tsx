@@ -7,13 +7,18 @@ import {
 	IconButton,
 } from "@chakra-ui/react";
 // @ts-ignore
-import { HamburgerIcon, AddIcon, StarIcon } from "@chakra-ui/icons";
+import { HamburgerIcon, AddIcon, StarIcon, LockIcon } from "@chakra-ui/icons";
 import AddCategoryModal from "../components/Modals/AddCategoryModal";
 import ExpenseCategoryModal from "../components/Modals/ExpenseCategoryModal";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { authenticate } from "../features/auth/authSlice";
 
 function MobileMenu() {
 	const [isOpen, setIsOpen] = useState(false);
 	const [isOpenView, setIsOpenView] = useState(false);
+	const dispatch = useDispatch();
+	const navigate = useNavigate();
 
 	const openAddCategoryModal = () => {
 		setIsOpen(true);
@@ -30,6 +35,18 @@ function MobileMenu() {
 	const onCloseView = () => {
 		setIsOpenView(false);
 	};
+
+	function delete_cookie(name: string) {
+		document.cookie =
+			name + "=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;";
+	}
+
+	const handleLogout = () => {
+		dispatch(authenticate(null));
+		delete_cookie("token");
+		navigate("/");
+	};
+
 	return (
 		<div>
 			<Menu isLazy>
@@ -46,6 +63,9 @@ function MobileMenu() {
 					</MenuItem>
 					<MenuItem icon={<AddIcon />} onClick={openAddCategoryModal}>
 						New Category
+					</MenuItem>
+					<MenuItem icon={<LockIcon />} onClick={handleLogout}>
+						Logout
 					</MenuItem>
 				</MenuList>
 			</Menu>
