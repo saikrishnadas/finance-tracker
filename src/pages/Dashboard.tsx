@@ -16,6 +16,8 @@ import {
 	getPreviousTotalIncome,
 	getTotalExpense,
 	getTotalIncome,
+	getFullExpense,
+	getFullIncome,
 } from "../features/transactionSlice";
 import dayjs from "dayjs";
 import { useNavigate } from "react-router-dom";
@@ -46,11 +48,13 @@ function Dashboard() {
 				}
 				if (data.transactions) {
 					dispatch(addTransaction(data.transactions));
-					dispatch(getTotalExpense());
-					dispatch(getTotalIncome());
 					let month = dayjs().month();
+					dispatch(getTotalExpense(month + 1));
+					dispatch(getTotalIncome(month + 1));
 					dispatch(getPreviousTotalExpense(month));
 					dispatch(getPreviousTotalIncome(month));
+					dispatch(getFullExpense());
+					dispatch(getFullIncome());
 					dispatch(getDebitsCount());
 					dispatch(getCreditCount());
 				}

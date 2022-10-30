@@ -14,7 +14,9 @@ const initialState: any = {
     previousTotalExpense:0,
     previousTotalIncome:0,
     debitsCount:0,
-    creditsCount:0
+    creditsCount:0,
+    fullExpense:0,
+    fullIncome:0
 }
 export const transactionSlice = createSlice({
   name: 'transaction',
@@ -27,21 +29,24 @@ export const transactionSlice = createSlice({
       // immutable state based off those changes
       state.transactions =  action.payload;
     },
-    getTotalExpense: (state) => {
+    getTotalExpense: (state,action) => {
         let total = 0;
         state.transactions.forEach((transaction:any) => {
+          if(transaction.transactions.date.month === action.payload){
           if(transaction.transactions.type==="Expense"){
             total += transaction.transactions.amount;
-          }
+          }}
         });
         state.totalExpense = total;
       },
-      getTotalIncome: (state) => {
+      getTotalIncome: (state,action) => {
         let total = 0;
         state.transactions.forEach((transaction:any) => {
+          if(transaction.transactions.date.month === action.payload){
           if(transaction.transactions.type==="Income"){
             total += transaction.transactions.amount;
           }
+        }
         });
         state.totalIncome = total;
       },
@@ -89,10 +94,28 @@ export const transactionSlice = createSlice({
         });
         state.creditsCount = count;
       },
+      getFullExpense: (state) => {
+        let total = 0;
+        state.transactions.forEach((transaction:any) => {
+          if(transaction.transactions.type==="Expense"){
+            total += transaction.transactions.amount;
+          }
+        });
+        state.fullExpense = total;
+      },
+      getFullIncome: (state) => {
+        let total = 0;
+        state.transactions.forEach((transaction:any) => {
+          if(transaction.transactions.type==="Income"){
+            total += transaction.transactions.amount;
+          }
+        });
+        state.fullIncome = total;
+      },
   },
 })
 
 // Action creators are generated for each case reducer function
-export const { addTransaction,getTotalExpense,getTotalIncome,getPreviousTotalExpense,getPreviousTotalIncome,getDebitsCount,getCreditCount } = transactionSlice.actions
+export const { addTransaction,getTotalExpense,getTotalIncome,getPreviousTotalExpense,getPreviousTotalIncome,getDebitsCount,getCreditCount,getFullExpense,getFullIncome } = transactionSlice.actions
 
 export default transactionSlice.reducer
