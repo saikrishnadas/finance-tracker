@@ -1,11 +1,9 @@
-import { useState, useEffect } from "react";
-import Calender from "../components/Calender";
-import { CalendarIcon, WarningIcon, Search2Icon } from "@chakra-ui/icons";
+import { useState } from "react";
+import { Search2Icon } from "@chakra-ui/icons";
 import { Input, InputGroup, InputLeftElement } from "@chakra-ui/react";
 import AddTransactionModal from "../components/Modals/AddTransactionModal";
-import { Dropdown, Menu, Space, DatePicker } from "antd";
+import { Dropdown, Menu, DatePicker } from "antd";
 import dayjs from "dayjs";
-import moment from "moment";
 import { Icon } from "@chakra-ui/react";
 import { MdAddCircle } from "react-icons/md";
 import { SlCalender } from "react-icons/sl";
@@ -16,7 +14,6 @@ function DateTransaction({ filterTransaction }: any) {
 	const [visible, setVisible] = useState(false);
 
 	const handleDate = (date: any, dateString: any) => {
-		console.log(date, dateString);
 		let selectedDate = dayjs(date).format("YYYY-MM-DD");
 		let month = selectedDate.split("-")[1];
 		filterTransaction("month", +month);
@@ -126,7 +123,6 @@ function DateTransaction({ filterTransaction }: any) {
 					<Input type="text" placeholder="Search" />
 				</InputGroup>
 			</div>
-			{/* <Calender /> */}
 			<AddTransactionModal isOpen={isOpen} onClose={onClose} />
 		</div>
 	);

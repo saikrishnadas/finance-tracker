@@ -1,15 +1,14 @@
-import { Tabs, TabList, TabPanels, Tab, TabPanel } from "@chakra-ui/react";
+import { Tabs, TabList, Tab } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 
 // @ts-ignore
-import { StarIcon, MoonIcon, TriangleUpIcon } from "@chakra-ui/icons";
+import { StarIcon, MoonIcon } from "@chakra-ui/icons";
 
 function TopTabbar() {
 	const navigate = useNavigate();
 	return (
 		<>
 			<Tabs
-				// orientation="vertical"
 				variant="soft-rounded"
 				colorScheme="yellow"
 				align="center"

@@ -1,38 +1,20 @@
 import React from "react";
-import { useState, useEffect } from "react";
-import { categories } from "../../utils/day";
-import { getCsrfToken, ApiServicePost } from "../../utils/ApiServices";
+import { useState } from "react";
+import { ApiServicePost } from "../../utils/ApiServices";
 import {
-	// Modal
-	ModalOverlay,
-	ModalContent,
-	ModalHeader,
-	ModalFooter,
-	ModalBody,
-	ModalCloseButton,
 	FormControl,
 	FormLabel,
 	Input,
 	Button,
 	Select,
 } from "@chakra-ui/react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { RootState } from "../../store/index";
-
-//@ts-ignore
-import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-//@ts-ignore
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import dayjs, { Dayjs } from "dayjs";
-//@ts-ignore
-import { DesktopDatePicker } from "@mui/x-date-pickers/DesktopDatePicker";
-import TextField from "@mui/material/TextField";
-
-import type { DatePickerProps } from "antd";
-import { DatePicker, Space, Radio } from "antd";
+import dayjs from "dayjs";
+import { DatePicker, Radio } from "antd";
 import "antd/dist/antd.css";
 import { Modal, Form } from "antd";
-import { width } from "@mui/system";
+
 import moment from "moment";
 
 interface AddTransactionModalProps {
@@ -49,17 +31,13 @@ function AddTransactionModal({ isOpen, onClose }: AddTransactionModalProps) {
 	const [day, setDay] = useState<any>(null);
 	const [month, setMonth] = useState<any>(null);
 	const [year, setYear] = useState<any>(null);
-	const initialRef = React.useRef(null);
-	const finalRef = React.useRef(null);
 	const token = useSelector((state: RootState) => state.auth.token);
 	const categories = useSelector(
 		(state: RootState) => state.category.categories
 	);
 
 	const handleDate = (date: any, dateString: any) => {
-		console.log(date, dateString);
 		let selectedDate = dayjs(date).format("YYYY-MM-DD");
-		// let formattedDate = dayjs(selectedDate);
 		let day = selectedDate.split("-")[2];
 		let month = selectedDate.split("-")[1];
 		let year = selectedDate.split("-")[0];
@@ -70,10 +48,6 @@ function AddTransactionModal({ isOpen, onClose }: AddTransactionModalProps) {
 	};
 
 	const handleSubmit = () => {
-		console.log(amount);
-		console.log(category);
-		console.log(note);
-		console.log(date);
 		ApiServicePost(
 			"/transaction",
 			"POST",
@@ -91,12 +65,8 @@ function AddTransactionModal({ isOpen, onClose }: AddTransactionModalProps) {
 			},
 			token
 		)
-			.then((data: boolean) => {
-				console.log(data);
-			})
-			.catch((err) => {
-				console.log(err);
-			});
+			.then((data: boolean) => {})
+			.catch((err) => {});
 		onClose();
 	};
 
@@ -108,19 +78,10 @@ function AddTransactionModal({ isOpen, onClose }: AddTransactionModalProps) {
 				onCancel={onClose}
 				footer={null}
 			>
-				<Form
-					name="addTransaction"
-					// labelCol={{ span: 8 }}
-					// wrapperCol={{ span: 16 }}
-					// initialValues={{ remember: true }}
-					onFinish={handleSubmit}
-					//   onFinishFailed={onFinishFailed}
-					// autoComplete="off"
-				>
+				<Form name="addTransaction" onFinish={handleSubmit}>
 					<FormControl>
 						<FormLabel>Amount</FormLabel>
 						<Form.Item
-							// label="Username"
 							name="amount"
 							rules={[
 								{
@@ -131,7 +92,6 @@ function AddTransactionModal({ isOpen, onClose }: AddTransactionModalProps) {
 						>
 							<Input
 								type="number"
-								ref={initialRef}
 								placeholder="Enter Amount"
 								onChange={(e: any) => setAmount(e.target.value)}
 							/>
@@ -141,7 +101,6 @@ function AddTransactionModal({ isOpen, onClose }: AddTransactionModalProps) {
 					<FormControl mt={4}>
 						<FormLabel>Category</FormLabel>
 						<Form.Item
-							// label="Username"
 							name="category"
 							rules={[
 								{
@@ -170,7 +129,6 @@ function AddTransactionModal({ isOpen, onClose }: AddTransactionModalProps) {
 					<FormControl mt={4}>
 						<FormLabel>Date</FormLabel>
 						<Form.Item
-							// label="Username"
 							name="date"
 							rules={[
 								{
@@ -193,7 +151,6 @@ function AddTransactionModal({ isOpen, onClose }: AddTransactionModalProps) {
 					<FormControl mt={4}>
 						<FormLabel>Type</FormLabel>
 						<Form.Item
-							// label="Username"
 							name="type"
 							rules={[
 								{
@@ -215,7 +172,6 @@ function AddTransactionModal({ isOpen, onClose }: AddTransactionModalProps) {
 					<FormControl mt={4}>
 						<FormLabel>{`Note (Optional)`}</FormLabel>
 						<Form.Item
-							// label="Username"
 							name="note"
 							rules={[
 								{

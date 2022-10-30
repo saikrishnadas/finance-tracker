@@ -1,25 +1,9 @@
-import { Tabs, TabList, TabPanels, Tab, TabPanel } from "@chakra-ui/react";
-import { useNavigate } from "react-router-dom";
-
-// @ts-ignore
-import { StarIcon, MoonIcon } from "@chakra-ui/icons";
-// @ts-ignore
-import { Link } from "@chakra-ui/core";
-import { useState } from "react";
+import { Tabs } from "@chakra-ui/react";
 import { useSelector } from "react-redux";
 import { RootState } from "../store/index";
 
-function Tabbar() {
-	const navigate = useNavigate();
+function Tabbar({ handlePage }: any) {
 	const selected = useSelector((state: RootState) => state.tab.selected);
-
-	const handlePage = (index: any) => {
-		if (index === 0) {
-			navigate("/");
-		} else {
-			navigate("/dashboard");
-		}
-	};
 
 	return (
 		<>
@@ -29,7 +13,6 @@ function Tabbar() {
 				colorScheme="black"
 				isLazy={true}
 				className="h-[80%]"
-				// onChange={(index) => handlePage(index)}
 			>
 				<div className="flex flex-col items-center space-y-4 font-bold">
 					<div

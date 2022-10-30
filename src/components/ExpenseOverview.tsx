@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Expenses from "./Expenses";
 import ExpenseCategoryModal from "./Modals/ExpenseCategoryModal";
 import { useSelector } from "react-redux";
@@ -9,7 +9,6 @@ function ExpenseOverview() {
 	const categories = useSelector(
 		(state: RootState) => state.category.categories
 	);
-	const token = useSelector((state: RootState) => state.auth.token);
 
 	const openCategoryModal = () => {
 		setIsOpen(true);
