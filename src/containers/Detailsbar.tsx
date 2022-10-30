@@ -49,13 +49,13 @@ function Detailsbar() {
 			});
 	};
 
-	useEffect(() => {
-		getCategories();
-	}, []);
+	// useEffect(() => {
+	// 	getCategories();
+	// }, []);
 
 	useEffect(() => {
-		console.log("CATEGORIES", categories);
-	}, []);
+		console.log("CATEGORIES -", categories);
+	}, [categories]);
 
 	return (
 		<div className="bg-gray-200 w-[18vw] pt-10 lg:flex flex-col justify-between pb-5 gap-y-10 hidden">
@@ -77,6 +77,7 @@ function Detailsbar() {
 				>
 					<option value="india">India</option>
 				</Select>
+				<button onClick={getCategories}>Click to get category</button>
 			</div>
 			<AddCategoryModal isOpen={isOpen} onClose={onClose} />
 		</div>
