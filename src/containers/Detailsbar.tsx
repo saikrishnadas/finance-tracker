@@ -44,8 +44,8 @@ function Detailsbar() {
 					return navigate("/login");
 				}
 				console.log("DATA", data);
-				setCategories(data.categories);
-				dispatch(addCategory(data.categories));
+				setCategories(data);
+				// dispatch(addCategory(data.categories));
 			});
 	};
 
