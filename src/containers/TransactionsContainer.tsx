@@ -17,11 +17,12 @@ import {
 import dayjs from "dayjs";
 import { ApiServicePost } from "../utils/ApiServices";
 import AddTransactionModal from "../components/Modals/AddTransactionModal";
+import { Skeleton } from "antd";
 
 function TransactionsContainer() {
 	const [isOpen, setIsOpen] = useState(false);
 	const [transaction, setTransaction] = useState([]);
-	const [test, setTest] = useState([]);
+	const [loading, setLoading] = useState(true);
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
 	const user = useSelector((state: RootState) => state.auth.user);
@@ -66,6 +67,7 @@ function TransactionsContainer() {
 					dispatch(getPreviousTotalIncome(month));
 					dispatch(getDebitsCount());
 					dispatch(getCreditCount());
+					setLoading(false);
 				}
 			});
 	};
@@ -133,34 +135,40 @@ function TransactionsContainer() {
 	}, []);
 
 	return (
-		<div>
-			<DateTransaction
-				filterTransaction={filterTransaction}
-				openAddTransactionModal={openAddTransactionModal}
-			/>
-			<Total />
-			<div className="w-[100%] h-[0.5px] bg-gray-300 mt-5" />
-			<div className="pr-5 scrollbar-thumb-blue-600 scrollbar-track-gray-100 scrollbar-thin overflow-auto mb-8 lg:mb-0 lg:h-[32em] max-h-[32em]">
-				{transaction?.map((transaction: any) => (
-					<span key={transaction._id}>
-						<Record
-							type={transaction.transactions.type}
-							amount={transaction.transactions.amount}
-							category={transaction.transactions.category}
-							date={transaction.transactions.date}
-							note={transaction.transactions.note}
-							id={transaction._id}
-							deleteTransaction={deleteTransaction}
-						/>
-					</span>
-				))}
-			</div>
+		<>
+			{loading ? (
+				<Skeleton active />
+			) : (
+				<>
+					<DateTransaction
+						filterTransaction={filterTransaction}
+						openAddTransactionModal={openAddTransactionModal}
+					/>
+					<Total />
+					<div className="w-[100%] h-[0.5px] bg-gray-300 mt-5" />
+					<div className="pr-5 scrollbar-thumb-blue-600 scrollbar-track-gray-100 scrollbar-thin overflow-auto mb-8 lg:mb-0 lg:h-[32em] max-h-[32em]">
+						{transaction?.map((transaction: any) => (
+							<span key={transaction._id}>
+								<Record
+									type={transaction.transactions.type}
+									amount={transaction.transactions.amount}
+									category={transaction.transactions.category}
+									date={transaction.transactions.date}
+									note={transaction.transactions.note}
+									id={transaction._id}
+									deleteTransaction={deleteTransaction}
+								/>
+							</span>
+						))}
+					</div>
+				</>
+			)}
 			<AddTransactionModal
 				isOpen={isOpen}
 				onClose={onClose}
 				addTransaction={addTransactions}
 			/>
-		</div>
+		</>
 	);
 }
 
