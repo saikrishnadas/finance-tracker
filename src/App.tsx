@@ -5,7 +5,6 @@ import Login from "./pages/Login";
 import Home from "./pages/Home";
 import Dashboard from "./pages/Dashboard";
 import Register from "./pages/Register";
-import ProtectedRoutes from "./utils/ProtectedRoutes";
 import { ChakraProvider, extendTheme } from "@chakra-ui/react";
 import PageNotFound404 from "./pages/PageNotFound404";
 import { useSelector } from "react-redux";
@@ -32,7 +31,6 @@ function App() {
 		<div className="min-h-[100vh]">
 			<ChakraProvider theme={theme}>
 				<Routes>
-					{/* <Route element={<ProtectedRoutes />}> */}
 					<Route
 						path="/"
 						element={user ? <Home /> : <Navigate to="/login" />}
@@ -41,7 +39,6 @@ function App() {
 						path="/dashboard"
 						element={user ? <Dashboard /> : <Navigate to="/login" />}
 					/>
-					{/* </Route> */}
 					<Route
 						path="/login"
 						element={!user ? <Login /> : <Navigate to="/" />}
