@@ -4,7 +4,7 @@ import Profile from "../components/Profile";
 import CompanyLogo from "../images/logo-black.png";
 import MobileMenu from "./MobileMenu";
 import { useDispatch } from "react-redux";
-import { authenticate } from "../features/auth/authSlice";
+import { authenticate, logout } from "../features/auth/authSlice";
 import { useNavigate } from "react-router-dom";
 
 function Sidebar() {
@@ -16,9 +16,7 @@ function Sidebar() {
 			name + "=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;";
 	}
 	const handleLogout = () => {
-		dispatch(authenticate(null));
-		delete_cookie("token");
-		navigate("/");
+		dispatch(logout());
 	};
 
 	const handlePage = (index: any) => {

@@ -31,7 +31,7 @@ function AddTransactionModal({ isOpen, onClose, addTransaction }: any) {
 	const [day, setDay] = useState<any>(null);
 	const [month, setMonth] = useState<any>(null);
 	const [year, setYear] = useState<any>(null);
-	const token = useSelector((state: RootState) => state.auth.token);
+	const user = useSelector((state: RootState) => state.auth.user);
 	const categories = useSelector(
 		(state: RootState) => state.category.categories
 	);

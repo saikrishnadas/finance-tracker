@@ -3,8 +3,8 @@ import { useSelector } from "react-redux";
 import type { RootState } from "../store";
 
 function ProtectedRoutes() {
-	const token = useSelector((state: RootState) => state.auth.token);
-	return token ? <Outlet /> : <Navigate to="/login" />;
+	const user = useSelector((state: RootState) => state.auth.user);
+	return user ? <Outlet /> : <Navigate to="/login" />;
 }
 
 export default ProtectedRoutes;

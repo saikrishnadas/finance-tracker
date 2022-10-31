@@ -24,7 +24,7 @@ function TransactionsContainer() {
 	const [test, setTest] = useState([]);
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
-	const token = useSelector((state: RootState) => state.auth.token);
+	const user = useSelector((state: RootState) => state.auth.user);
 	const transactions = useSelector(
 		(state: RootState) => state.transaction.transactions
 	);
@@ -42,7 +42,7 @@ function TransactionsContainer() {
 			method: "GET",
 			headers: {
 				"Content-Type": "application/json",
-				Authorization: `Bearer ${token}`,
+				Authorization: `Bearer ${user.token}`,
 			},
 		})
 			.then((response) => response.json())
@@ -87,7 +87,7 @@ function TransactionsContainer() {
 	};
 
 	const deleteTransaction = (id: any) => {
-		ApiServicePost("/transaction", "DELETE", { transactionId: id }, token)
+		ApiServicePost("/transaction", "DELETE", { transactionId: id }, user.token)
 			.then((data: boolean) => {
 				getTransactions();
 			})
@@ -119,7 +119,7 @@ function TransactionsContainer() {
 				type: type,
 				note: note,
 			},
-			token
+			user.token
 		)
 			.then((data: boolean) => {
 				getTransactions();

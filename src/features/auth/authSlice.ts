@@ -4,11 +4,11 @@ import Cookies from "js-cookie";
 
 
 export interface AuthState {
-  token: any
+  user: any
 }
 
 const initialState: AuthState = {
-    token: Cookies.get("token") ? JSON.parse(Cookies.get("token")!) : null,
+    user: localStorage.getItem("user") ? JSON.parse(localStorage.getItem("user")!) : null,
 }
 
 export const authSlice = createSlice({
@@ -20,13 +20,16 @@ export const authSlice = createSlice({
       // doesn't actually mutate the state because it uses the Immer library,
       // which detects changes to a "draft state" and produces a brand new
       // immutable state based off those changes
-      state.token = action.payload
-
+      state.user = action.payload
     },
+    logout:(state) => {
+      state.user = null; 
+      localStorage.removeItem("user");
+    }
   },
 })
 
 // Action creators are generated for each case reducer function
-export const { authenticate } = authSlice.actions
+export const { authenticate,logout } = authSlice.actions
 
 export default authSlice.reducer

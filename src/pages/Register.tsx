@@ -15,48 +15,25 @@ import { useNavigate } from "react-router-dom";
 import { Form } from "antd";
 import { useSelector } from "react-redux";
 import { RootState } from "../store/index";
+import { useSignup } from "../hooks/useSignup";
 
 function Register() {
 	const navigate = useNavigate();
 	const [csrfTokenState, setCsrfTokenState] = useState("");
-	const token = useSelector((state: RootState) => state.auth.token);
+	const user = useSelector((state: RootState) => state.auth.user);
 
-	const [error, setError] = useState(false);
-	const [errorMessage, setErrorMessage] = useState("");
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [confirmPassword, setConfirmPassword] = useState("");
+	const { signup, loading, error, errorMessage } = useSignup();
 
 	const isEmailError = email === "ss";
 	const isPasswordError = password === "ss";
 	const isConfirmPasswordError = confirmPassword === "ss";
 
-	const onFinish = () => {
-		ApiService("/register", "POST", {
-			email: email,
-			password: password,
-			confirmPassword: confirmPassword,
-		})
-			.then((data) => {
-				navigate("/");
-			})
-			.catch((err) => {
-				setError(true);
-				setErrorMessage(err);
-			});
+	const onFinish = async () => {
+		await signup(email, password, confirmPassword);
 	};
-
-	// useEffect(() => {
-	// 	getCsrfToken("/getCsrf", "GET").then((response) =>
-	// 		setCsrfTokenState(response?.csrfToken)
-	// 	);
-	// }, []);
-
-	useEffect(() => {
-		if (token) {
-			navigate("/");
-		}
-	}, []);
 
 	return (
 		<>
@@ -180,6 +157,7 @@ function Register() {
 									className="mt-5"
 									// onClick={onFinish}
 									type="submit"
+									disabled={loading}
 								>
 									Register
 								</Button>
