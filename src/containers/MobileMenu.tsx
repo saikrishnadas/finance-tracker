@@ -12,7 +12,7 @@ import AddCategoryModal from "../components/Modals/AddCategoryModal";
 import ExpenseCategoryModal from "../components/Modals/ExpenseCategoryModal";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { authenticate } from "../features/auth/authSlice";
+import { authenticate, logout } from "../features/auth/authSlice";
 
 function MobileMenu() {
 	const [isOpen, setIsOpen] = useState(false);
@@ -42,9 +42,7 @@ function MobileMenu() {
 	}
 
 	const handleLogout = () => {
-		dispatch(authenticate(null));
-		delete_cookie("token");
-		navigate("/");
+		dispatch(logout());
 	};
 
 	return (

@@ -9,7 +9,7 @@ import { ApiServicePost } from "../utils/ApiServices";
 function BudgetContainer() {
 	const [isOpen, setIsOpen] = useState(false);
 	const [budget, setBudget] = useState<any>(null);
-	const token = useSelector((state: RootState) => state.auth.token);
+	const user = useSelector((state: RootState) => state.auth.user);
 	const totalExpense = useSelector(
 		(state: RootState) => state.transaction.totalExpense
 	);
@@ -27,7 +27,7 @@ function BudgetContainer() {
 			method: "GET",
 			headers: {
 				"Content-Type": "application/json",
-				Authorization: `Bearer ${token}`,
+				Authorization: `Bearer ${user.token}`,
 			},
 		})
 			.then((response) => response.json())
@@ -41,7 +41,7 @@ function BudgetContainer() {
 			"/budget",
 			"POST",
 			{ budget: count && parseInt(count) },
-			token
+			user.token
 		)
 			.then((data: boolean) => {
 				getBudget();

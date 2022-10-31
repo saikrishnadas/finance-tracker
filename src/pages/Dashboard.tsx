@@ -24,7 +24,7 @@ import { useNavigate } from "react-router-dom";
 
 function Dashboard() {
 	const navigate = useNavigate();
-	const token = useSelector((state: RootState) => state.auth.token);
+	const user = useSelector((state: RootState) => state.auth.user);
 	const debitsCount = useSelector(
 		(state: RootState) => state.transaction.debitsCount
 	);
@@ -38,7 +38,7 @@ function Dashboard() {
 			method: "GET",
 			headers: {
 				"Content-Type": "application/json",
-				Authorization: `Bearer ${token}`,
+				Authorization: `Bearer ${user.token}`,
 			},
 		})
 			.then((response) => response.json())
@@ -66,11 +66,11 @@ function Dashboard() {
 		getTransactions();
 	}, []);
 
-	useEffect(() => {
-		if (!token) {
-			navigate("/login");
-		}
-	}, []);
+	// useEffect(() => {
+	// 	if (!user) {
+	// 		navigate("/login");
+	// 	}
+	// }, []);
 
 	return (
 		<div className="block lg:flex">

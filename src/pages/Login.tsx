@@ -17,6 +17,7 @@ import { useNavigate } from "react-router-dom";
 import type { RootState } from "../store";
 import { Form } from "antd";
 import Cookies from "js-cookie";
+import { useLogin } from "../hooks/useLogin";
 
 export interface InputLoginProps {
 	email: string;
@@ -28,10 +29,8 @@ function Login() {
 	const navigate = useNavigate();
 	const [csrfTokenState, setCsrfTokenState] = useState("");
 	const dispatch = useDispatch();
-	const token = useSelector((state: RootState) => state.auth.token);
-
-	const [error, setError] = useState(false);
-	const [errorMessage, setErrorMessage] = useState("");
+	const user = useSelector((state: RootState) => state.auth.user);
+	const { login, loading, error, errorMessage } = useLogin();
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 
@@ -43,38 +42,9 @@ function Login() {
 		setPassword("qwertyuiop");
 	};
 
-	const onFinish = () => {
-		ApiService("/login", "POST", { email: email, password: password })
-			.then((data: any) => {
-				let { token } = data;
-				// localStorage.setItem("token", token);
-				dispatch(authenticate(token));
-				Cookies.set("token", JSON.stringify(token));
-				navigate("/");
-			})
-			.catch((err) => {
-				setError(true);
-				setErrorMessage(err);
-			});
+	const onFinish = async () => {
+		await login(email, password);
 	};
-
-	// useEffect(() => {
-	// 	getCsrfToken("/getCsrf", "GET").then((response) =>
-	// 		setCsrfTokenState(response?.csrfToken)
-	// 	);
-	// }, []);
-
-	// useEffect(() => {
-	// 	if (isLoggedIn) {
-	// 		return navigate("/dashboard");
-	// 	}
-	// }, [isLoggedIn]);
-
-	useEffect(() => {
-		if (token) {
-			navigate("/");
-		}
-	}, []);
 
 	return (
 		<>
@@ -179,6 +149,7 @@ function Login() {
 									className="mt-5"
 									// onClick={onFinish}
 									type="submit"
+									disabled={loading}
 								>
 									Login
 								</Button>

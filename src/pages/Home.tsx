@@ -9,7 +9,7 @@ import { RootState } from "../store/index";
 import { changeSelected } from "../features/tabsSlice";
 
 function Home() {
-	const token = useSelector((state: RootState) => state.auth.token);
+	const user = useSelector((state: RootState) => state.auth.user);
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 
@@ -17,11 +17,11 @@ function Home() {
 		dispatch(changeSelected(0));
 	}, []);
 
-	useEffect(() => {
-		if (!token) {
-			navigate("/login");
-		}
-	}, []);
+	// useEffect(() => {
+	// 	if (!token) {
+	// 		navigate("/login");
+	// 	}
+	// }, []);
 
 	return (
 		<div>

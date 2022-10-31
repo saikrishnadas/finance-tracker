@@ -14,7 +14,7 @@ function Detailsbar() {
 	const [categories, setCategories] = useState([]);
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
-	const token = useSelector((state: RootState) => state.auth.token);
+	const user = useSelector((state: RootState) => state.auth.user);
 
 	const openAddCategoryModal = () => {
 		setIsOpen(true);
@@ -25,7 +25,7 @@ function Detailsbar() {
 	};
 
 	const deleteCategory = (id: any) => {
-		ApiServicePost("/categories", "DELETE", { categoryId: id }, token)
+		ApiServicePost("/categories", "DELETE", { categoryId: id }, user.token)
 			.then((data: boolean) => {
 				getCategories();
 			})
@@ -37,7 +37,7 @@ function Detailsbar() {
 			method: "GET",
 			headers: {
 				"Content-Type": "application/json",
-				Authorization: `Bearer ${token}`,
+				Authorization: `Bearer ${user.token}`,
 			},
 		})
 			.then((response) => response.json())
@@ -55,7 +55,7 @@ function Detailsbar() {
 			"/categories",
 			"POST",
 			{ title: name, color: color, type: type },
-			token
+			user.token
 		)
 			.then((data: boolean) => {
 				getCategories();

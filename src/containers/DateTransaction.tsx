@@ -14,7 +14,7 @@ import { RootState } from "../store/index";
 function DateTransaction({ filterTransaction, openAddTransactionModal }: any) {
 	const [show, setShow] = useState(false);
 	const [visible, setVisible] = useState(false);
-	const token = useSelector((state: RootState) => state.auth.token);
+	const user = useSelector((state: RootState) => state.auth.user);
 
 	const handleDate = (date: any, dateString: any) => {
 		let selectedDate = dayjs(date).format("YYYY-MM-DD");
