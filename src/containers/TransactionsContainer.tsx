@@ -52,14 +52,15 @@ function TransactionsContainer() {
 					return navigate("/login");
 				}
 				if (data.transactions) {
+					let month = dayjs().month();
 					let filteredTransaction = data.transactions.filter(
-						(transaction: any) => transaction.transactions.date.month === 10
+						(transaction: any) =>
+							transaction.transactions.date.month === month + 1
 					);
 					// console.log("filteredTransaction", filteredTransaction);
 					setTransaction(filteredTransaction);
 					// setTransaction(data.transactions);
 					dispatch(addTransaction(data.transactions));
-					let month = dayjs().month();
 					// console.log("Current month", month);
 					dispatch(getTotalExpense(month + 1));
 					dispatch(getTotalIncome(month + 1));

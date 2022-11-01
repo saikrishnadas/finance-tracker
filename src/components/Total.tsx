@@ -14,14 +14,18 @@ function Total() {
 		<div className="flex justify-between mt-10">
 			<div className="flex justify-between gap-x-5 lg:w-[50%]">
 				<div className="flex flex-col lg:items-center">
-					<p className="text-gray-500 text-sm capitalize">Total Expense</p>
+					<p className="text-gray-500 text-sm capitalize">
+						Current Month Expense
+					</p>
 					<p className="font-bold lg:text-lg">
 						{"\u20B9"}
 						{totalExpense}
 					</p>
 				</div>
 				<div className="flex flex-col lg:items-center">
-					<p className="text-gray-500 text-sm capitalize">Total Income</p>
+					<p className="text-gray-500 text-sm capitalize">
+						Current Month Income
+					</p>
 					<p className="font-bold lg:text-lg">
 						{"\u20B9"}
 						{totalIncome}
