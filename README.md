@@ -3,7 +3,7 @@
 [![Version](https://img.shields.io/badge/version-1.0.0-green)](https://github.com/saikrishnadas/finance-tracker)
 [![Live App](https://img.shields.io/badge/demo-online-green)](https://jovial-horse-b170bd.netlify.app/)
 
-![Logo](https://thestobookimages.s3.ap-south-1.amazonaws.com/Group+7+1.svg)
+![Logo](https://github.com/saikrishnadas/finance-tracker/blob/main/public/Group 12.png)
 
 **Finance Tracker** is a end solution to track and for visualizing income and expense.
 You could record each expense and income and compare it with other month spendings. This application also tells you 
