@@ -45,8 +45,8 @@ function ExpenseOverview() {
 					</>
 				) : (
 					<>
-						{Array.isArray(categories) &&
-							categories
+						{Array.isArray(categories.categories) &&
+							categories.categories
 								.slice(0, 4)
 								.map((category: any) => (
 									<span key={category._id}>

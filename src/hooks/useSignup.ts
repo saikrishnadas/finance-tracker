@@ -28,6 +28,7 @@ export const useSignup = () => {
 			.catch((err) => {
 				setError(true);
 				setErrorMessage(err);
+                setLoading(false)
 			});
     }
 

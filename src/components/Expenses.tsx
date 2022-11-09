@@ -31,6 +31,10 @@ function Expenses({ title, color }: ExpensesProps) {
 		return cartegoryValues;
 	};
 
+	useEffect(() => {
+		console.log("COLOR:", color);
+	}, []);
+
 	return (
 		<div
 			className={`flex justify-between items-center h-20 pr-2 pl-2 rounded-lg ${
@@ -38,8 +42,8 @@ function Expenses({ title, color }: ExpensesProps) {
 			} ${color === "blue" && "bg-blue-200"} ${
 				color === "green" && "bg-green-200"
 			} ${color === "purple" && "bg-purple-200"} ${
-				color === "yellow" && "bg-yellow-200"
-			}${color === "pink" && "bg-pink-200"}`}
+				color === "yellow" && "bg-yellow-400"
+			}${color === "pink" && "bg-pink-400"}`}
 		>
 			<div className="flex flex-col ml-5">
 				<p className="font-bold text-gray-400 text-sm">{title}</p>
