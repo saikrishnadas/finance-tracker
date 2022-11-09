@@ -10,7 +10,7 @@ You could record each expense and income and compare it with other month spendin
 were you have spent more, and where you can limit to save some bucks.
 This application also shows you a visual representation of earning and spendings.
 
-![App Screenshot](https://thestobookimages.s3.ap-south-1.amazonaws.com/frame.png)
+![App Screenshot](https://github.com/saikrishnadas/finance-tracker/blob/main/public/mockup.png)
 
 ## Live Demo
 
