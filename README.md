@@ -41,7 +41,7 @@ Most of the data is cached and optimized to run on different devices and to be s
 
 **Lighthouse Audits:**
 
-![Report](https://thestobookimages.s3.ap-south-1.amazonaws.com/Screenshot+2022-02-28+at+1.14.20+PM.png)
+![Report](https://github.com/saikrishnadas/finance-tracker/blob/main/public/lighthouse.png)
 
 ## Support
 
